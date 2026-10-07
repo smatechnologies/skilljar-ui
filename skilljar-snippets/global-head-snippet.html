@@ -1,0 +1,151 @@
+<!-- Continuous Learning styles, hosted on GitHub Pages. Edit source/ in the Continuous Learning Skilljar Theme folder, run tools/build.pl, push the hosted repo. -->
+<link rel="stylesheet" href="https://smatechnologies.github.io/skilljar-ui/learning/ct-learning.css">
+<!-- Kept from the live Learning head snippet (2 Oct 2026), appended UNCHANGED to the head paste file by tools/build.pl:
+     the course announcement banner. The rest of the old head snippet (fonts, tile styles: the old look)
+     is replaced; an exact copy is in releases/before-2026-10-02-learning/head-snippet-as-live.html. -->
+        <!-- ============================================================
+  Continuous Learning — Course Announcement Banner
+  New: OpCon Deploy Self-Guided
+  Paste into: Skilljar Dashboard > Theming > [your theme] >
+              Global Code Snippets > Head HTML
+  (Works from Footer HTML too — it waits for DOM ready.)
+  ============================================================ -->
+<script>
+(function () {
+  // ---------------- CONFIG ----------------
+  var CONFIG = {
+    // Bump this key any time you launch a new announcement so
+    // previously-dismissed users see the new banner.
+    storageKey: 'cont-banner-opcon-deploy-2026-08',
+
+    badgeText: 'NEW',
+    message: ' Our New OpCon Deploy Self-Guided Course is now available — learn to build, test, and promote deployment packages at your own pace.',
+    ctaText: 'Start Learning',
+
+    // Replace with the actual course detail page path:
+    ctaHref: '/opcon-deploy-manage-and-execute-multi-environment-schedule-deployments-1',
+
+    dismissible: true,
+
+    // Empty array = show on every page.
+    // Or restrict, e.g. ['/', '/page/department-trainings']
+    showOnPaths: [],
+
+    // Optional auto-expiry (banner stops rendering after this date).
+    // Set to null to never expire. Format: 'YYYY-MM-DD'
+    expires: null
+  };
+  // -----------------------------------------
+
+  // Expiry check
+  if (CONFIG.expires && new Date() > new Date(CONFIG.expires + 'T23:59:59')) return;
+
+  // Path scoping
+  if (CONFIG.showOnPaths.length &&
+      CONFIG.showOnPaths.indexOf(window.location.pathname) === -1) return;
+
+  // Dismissal check
+  try {
+    if (CONFIG.dismissible && localStorage.getItem(CONFIG.storageKey) === 'dismissed') return;
+  } catch (e) { /* localStorage unavailable — show banner anyway */ }
+
+  function injectStyles() {
+    if (document.getElementById('cont-banner-styles')) return;
+    var css = [
+      '#cont-course-banner{',
+      '  background:linear-gradient(90deg,#01111f 0%,#0f4bbd 100%);',
+      '  color:#ffffff;',
+      '  font-family:"BDO Grotesk","Inter","Helvetica Neue",Arial,sans-serif;',
+      '  padding:12px 20px;',
+      '  display:flex;align-items:center;justify-content:center;gap:14px;',
+      '  flex-wrap:wrap;position:relative;z-index:9999;',
+      '  font-size:15px;line-height:1.4;',
+      '}',
+      '#cont-course-banner .cont-banner-badge{',
+      '  background:#fa4716;color:#ffffff;font-weight:700;',
+      '  font-size:11px;letter-spacing:.08em;',
+      '  padding:3px 8px;border-radius:4px;flex:0 0 auto;',
+      '}',
+      '#cont-course-banner .cont-banner-msg{margin:0;text-align:center;}',
+      '#cont-course-banner .cont-banner-cta{',
+      '  background:#ffffff;color:#0f4bbd;font-weight:600;',
+      '  padding:6px 16px;border-radius:6px;text-decoration:none;',
+      '  flex:0 0 auto;transition:background .15s ease,color .15s ease;',
+      '}',
+      '#cont-course-banner .cont-banner-cta:hover{',
+      '  background:#e3f1fd;color:#0c3c97;text-decoration:none;',
+      '}',
+      '#cont-course-banner .cont-banner-close{',
+      '  background:none;border:none;color:#90c8f8;cursor:pointer;',
+      '  font-size:20px;line-height:1;padding:4px 8px;',
+      '  position:absolute;right:8px;top:50%;transform:translateY(-50%);',
+      '}',
+      '#cont-course-banner .cont-banner-close:hover{color:#ffffff;}',
+      '@media (max-width:600px){',
+      '  #cont-course-banner{font-size:14px;padding:12px 40px 12px 16px;}',
+      '}'
+    ].join('');
+    var style = document.createElement('style');
+    style.id = 'cont-banner-styles';
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+  }
+
+  function buildBanner() {
+    var banner = document.createElement('div');
+    banner.id = 'cont-course-banner';
+    banner.setAttribute('role', 'region');
+    banner.setAttribute('aria-label', 'Course announcement');
+
+    var badge = document.createElement('span');
+    badge.className = 'cont-banner-badge';
+    badge.textContent = CONFIG.badgeText;
+    banner.appendChild(badge);
+
+    var msg = document.createElement('p');
+    msg.className = 'cont-banner-msg';
+    msg.textContent = CONFIG.message;
+    banner.appendChild(msg);
+
+    var cta = document.createElement('a');
+    cta.className = 'cont-banner-cta';
+    cta.href = CONFIG.ctaHref;
+    cta.textContent = CONFIG.ctaText;
+    banner.appendChild(cta);
+
+    if (CONFIG.dismissible) {
+      var close = document.createElement('button');
+      close.className = 'cont-banner-close';
+      close.setAttribute('aria-label', 'Dismiss announcement');
+      close.innerHTML = '&times;';
+      close.addEventListener('click', function () {
+        banner.parentNode && banner.parentNode.removeChild(banner);
+        try { localStorage.setItem(CONFIG.storageKey, 'dismissed'); } catch (e) {}
+      });
+      banner.appendChild(close);
+    }
+    return banner;
+  }
+
+  function insertBanner() {
+    if (document.getElementById('cont-course-banner')) return;
+    injectStyles();
+    var banner = buildBanner();
+    // Prefer placing directly below the Skilljar header if present;
+    // otherwise prepend to the body.
+    var header = document.getElementById('skilljar-header') ||
+                 document.querySelector('.sj-page-header, header');
+    if (header && header.parentNode) {
+      header.parentNode.insertBefore(banner, header.nextSibling);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', insertBanner);
+  } else {
+    insertBanner();
+  }
+})();
+</script>
