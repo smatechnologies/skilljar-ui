@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tile maker · Continuous Skilljar sites</title>
+<meta name="description" content="Make course tiles for the Continuous Skilljar sites: pick a colour, type the title, download the image.">
+<link rel="icon" href="../assets/continuous-favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Medium.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-DemiBold.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Bold.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-ExtraBold.woff2) format("woff2"); font-weight: 800; font-display: swap; }
+@font-face { font-family: "Kaleko"; src: url(https://7300903.fs1.hubspotusercontent-na1.net/hubfs/7300903/raw_assets/public/continuous-theme-sept2025/css/fonts/kaleko_205_medium.ttf) format("truetype"); font-weight: 500; font-display: swap; }
+:root { --blue: #0f4bbd; --blue-900: #0c3c97; --blue-50: #e3f1fd; --blue-100: #bcdefb; --sky: #90c8f8; --orange: #fa4716; --bone: #e9d9c3;
+  --navy: #01111f; --g700: #34414c; --g600: #677079; --g100: #cccfd2; --g10: #f4faff; --font: "BDO Grotesk", Inter, Arial, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--font); color: var(--navy); background: var(--g10); font-size: 16px; line-height: 1.5; }
+::selection { background: var(--blue); color: #fff; }
+a { color: var(--blue); }
+
+.app { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 32px; align-items: start; }
+.panel { background: #fff; border: 1px solid var(--g100); border-radius: 12px; padding: 24px; position: sticky; top: 24px; }
+.hero__in { padding: 44px 24px 52px; }
+.panel h2 { font-size: 26px; line-height: 1.15; margin: 0 0 4px; letter-spacing: -.01em; }
+.panel__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.newbtn { flex: none; display: inline-flex; align-items: center; gap: 6px; font: 700 14px var(--font); color: var(--blue); background: #fff; border: 1px solid var(--blue-100); border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.newbtn:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.newbtn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.newbtn svg { width: 14px; height: 14px; }
+.panel > p { margin: 0 0 20px; color: var(--g600); font-size: 14px; }
+.field { margin-bottom: 18px; }
+.field > label, .field > .lab { display: block; font-size: 13px; font-weight: 700; color: var(--g700); margin-bottom: 6px; }
+.field small { display: block; color: var(--g600); font-size: 12px; margin-top: 5px; }
+input[type=text], textarea, select { width: 100%; font: 500 15px var(--font); color: var(--navy); background: #fff; border: 1px solid var(--g100); border-radius: 6px; padding: 9px 11px; }
+textarea { resize: vertical; min-height: 64px; line-height: 1.35; }
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: var(--blue); }
+.swatches { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sw { position: relative; border: 2px solid var(--g100); border-radius: 10px; padding: 0; overflow: hidden; cursor: pointer; background: #fff; text-align: left; font: inherit; }
+.sw span.chipc { display: block; height: 44px; }
+.sw b { display: block; font-size: 14px; padding: 8px 10px 0; }
+.sw em { display: block; font-style: normal; font-size: 12px; color: var(--g600); padding: 0 10px 8px; }
+.sw[aria-pressed="true"] { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-50); }
+.sw:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.c-blue { background: linear-gradient(45deg, #01111f 14%, #0c3c97 70%, #0f4bbd 100%); }
+.c-beige { background: linear-gradient(45deg, #dcc6a6 0%, #e9d9c3 45%, #f6efe4 100%); }
+.c-sky { background: radial-gradient(circle at 80% 30%, rgba(144,200,248,.7) 0 14%, transparent 15%), linear-gradient(135deg, #eef6fe 0%, #d6e8fb 100%); }
+.c-night { background: radial-gradient(circle at 80% 30%, rgba(15,75,189,.9) 0 14%, transparent 15%), radial-gradient(circle at 78% 32%, rgba(15,75,189,.6), transparent 60%), #01111f; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.presets button { font: 600 12px var(--font); color: var(--blue-900); background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: 99px; padding: 3px 10px; cursor: pointer; }
+.presets button:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+.actions { display: grid; gap: 10px; margin-top: 22px; }
+.btn { font: 700 16px var(--font); border-radius: 6px; padding: 12px 16px; cursor: pointer; border: 0; text-align: center; }
+.btn--primary { background: var(--orange); color: #fff; font-size: 18px; }
+.btn--primary:hover { background: #d93d10; }
+.btn--ghost { background: #fff; color: var(--blue); border: 1px solid var(--blue-100); }
+.btn--ghost:hover { border-color: var(--blue); }
+.btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.btn:disabled { opacity: .55; cursor: progress; }
+.status { font-size: 13px; color: var(--g600); min-height: 20px; margin: 4px 0 0; }
+
+.stage h2 { font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--g600); margin: 0 0 10px; }
+.canvaswrap { background: #fff; border: 1px solid var(--g100); border-radius: 12px; padding: 14px; box-shadow: 0 8px 24px rgba(1,17,31,.06); }
+canvas#tile { width: 100%; height: auto; display: block; border-radius: 6px; }
+.incontext { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.card { background: #fff; border: 1px solid var(--g100); border-radius: 12px; overflow: hidden; }
+.card .img { position: relative; aspect-ratio: 16/9; }
+.card .img canvas, .card .img img { width: 100%; height: 100%; display: block; }
+.card .fmt { position: absolute; left: 10px; top: 10px; font-size: 10px; font-weight: 700; letter-spacing: .06em; background: #fff; color: var(--navy); border-radius: 99px; padding: 2px 8px; display: inline-flex; gap: 5px; align-items: center; }
+.card .fmt i { width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+.card.bottom .fmt { top: auto; bottom: 10px; border-radius: 3px; background: var(--navy); color: #fff; }
+.card .body { padding: 12px 14px 16px; }
+.card .name { font-size: 15px; font-weight: 700; line-height: 1.25; }
+.card .meta { font-size: 12px; color: var(--g600); margin-top: 4px; }
+.card.ghost .img { background: repeating-linear-gradient(45deg, #eef2f6 0 10px, #f6f8fa 10px 20px); }
+.card.ghost .name, .card.ghost .meta { color: #b0b6bb; }
+
+details.batch { margin-top: 28px; background: #fff; border: 1px solid var(--g100); border-radius: 12px; padding: 18px 22px; }
+details.batch summary { font-weight: 700; cursor: pointer; font-size: 17px; }
+details.batch p { color: var(--g700); font-size: 14px; max-width: 760px; }
+details.batch textarea { font-family: ui-monospace, Consolas, monospace; font-size: 13px; min-height: 160px; }
+code { background: var(--blue-50); border-radius: 4px; padding: 0 4px; font-size: .92em; }
+
+@media (max-width: 980px) {
+  .app { grid-template-columns: 1fr; }
+  .panel { position: static; }
+  .incontext { grid-template-columns: 1fr 1fr; }
+  .incontext .ghost:last-child { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="bar"><div class="bar__in"><a class="bar__brand" href="../"><img src="../assets/continuous-horizontal-white-site.svg" alt="Continuous"><span>LMS toolkit</span></a><nav aria-label="Toolkit"><a href="../">Home</a><a href="../tagging/">Tagging guide</a><a href="../tiles/" aria-current="page">Tile maker</a><a href="../playbook/">Uplift playbook</a><a href="../visualcron-academy/">VisualCron Academy</a></nav></div></header>
+<div class="hero"><div class="hero__in">
+  <span class="pill">Tile maker</span>
+  <h1>Make a course tile</h1>
+  <p class="hero__lead">Pick a colour, type the title, and download a 1280 × 720 image ready to upload as the course image in Skilljar. Blue is for products and beige for internal training; Sky and Night are the speech-bubble designs.</p>
+</div></div>
+
+<div class="app">
+  <form class="panel" id="form" autocomplete="off">
+    <div class="panel__head">
+      <h2>Your tile</h2>
+      <button type="button" class="newbtn" id="new" title="Clear everything and start a new tile"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 3v10M3 8h10"/></svg>New</button>
+    </div>
+    <p>Fill in the fields; the preview updates as you type.</p>
+
+    <div class="field">
+      <span class="lab" id="lab-colour">Colour</span>
+      <div class="swatches" role="group" aria-labelledby="lab-colour">
+        <button type="button" class="sw" data-c="blue"><span class="chipc c-blue"></span><b>Blue</b><em>Products</em></button>
+        <button type="button" class="sw" data-c="beige"><span class="chipc c-beige"></span><b>Beige</b><em>Internal training</em></button>
+        <button type="button" class="sw" data-c="sky"><span class="chipc c-sky"></span><b>Sky</b><em>Light, speech bubbles</em></button>
+        <button type="button" class="sw" data-c="night"><span class="chipc c-night"></span><b>Night</b><em>Dark, speech bubbles</em></button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="label">Label</label>
+      <input type="text" id="label" name="label" maxlength="40">
+      <div class="presets" aria-label="Common labels">
+        <button type="button" data-label="OpCon" data-c="blue">OpCon</button>
+        <button type="button" data-label="Permission Assist" data-c="blue">Permission Assist</button>
+        <button type="button" data-label="Banking Expertise" data-c="beige">Banking Expertise</button>
+        <button type="button" data-label="Application Support" data-c="beige">Application Support</button>
+      </div>
+      <small id="labelhint">On Sky and Night, the labels OpCon and Permission Assist show as the product logo; OpCon also gets its symbol in the big speech bubble.</small>
+    </div>
+
+    <div class="field">
+      <label for="title">Title</label>
+      <textarea id="title" name="title" rows="2" maxlength="90"></textarea>
+      <small>Press Enter to choose where the line breaks. Long titles get smaller on their own.</small>
+    </div>
+
+    <div class="field">
+      <label for="sub">Subtitle <span style="font-weight:500;color:var(--g600)">(optional)</span></label>
+      <input type="text" id="sub" name="sub" maxlength="90">
+      <small>Usually the part of the course title after the colon.</small>
+    </div>
+
+    <div class="field">
+      <label for="chip">Corner tag <span style="font-weight:500;color:var(--g600)">(optional)</span></label>
+      <input type="text" id="chip" name="chip" maxlength="24" list="chips">
+      <datalist id="chips"><option value="Instructor-led"><option value="Sample"><option value="New"></datalist>
+      <small>Top right. The Learning site puts its labels (LIVE, ON DEMAND, FEATURED) along the top left of the image, so keep that corner clear.</small>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn--primary" id="download">Download tile</button>
+      <button type="button" class="btn btn--ghost" id="copylink">Copy a link to this tile</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <section class="stage" aria-label="Preview">
+    <h2>Preview</h2>
+    <div class="canvaswrap"><canvas id="tile" width="1280" height="720" aria-label="Tile preview"></canvas></div>
+
+    <h2 style="margin-top:28px">In the catalog</h2>
+    <div class="incontext">
+      <div class="card"><div class="img"><img id="cardimg" alt=""><span class="fmt" id="cardfmt"><i></i>LIVE</span></div>
+        <div class="body"><div class="name" id="cardname"></div><div class="meta">How it sits on a catalog card</div></div></div>
+      <div class="card ghost"><div class="img"></div><div class="body"><div class="name">Another course</div><div class="meta">&nbsp;</div></div></div>
+      <div class="card ghost"><div class="img"></div><div class="body"><div class="name">Another course</div><div class="meta">&nbsp;</div></div></div>
+    </div>
+
+    <details class="batch">
+      <summary>Make many at once</summary>
+      <p>One tile per line: <code>colour, label, title, subtitle, corner tag</code>. Colour is <code>blue</code>, <code>beige</code>, <code>sky</code> or <code>night</code>; use <code>|</code> in the title for a line break; leave a part empty with nothing between the commas. Each tile downloads as its own file, named from its title. Your browser may ask once to allow several downloads.</p>
+      <textarea id="batch" spellcheck="false" placeholder="blue, OpCon, OpCon Fundamentals, Build and Manage Automated Workflows, Instructor-led
+beige, Banking Expertise, Becoming Banking|Experts 101, Understanding How Banks Work,"></textarea>
+      <div class="actions" style="max-width:280px"><button type="button" class="btn btn--ghost" id="batchgo">Download all</button></div>
+    </details>
+  </section>
+</div>
+
+<script>
+(function () {
+  var W = 1280, H = 720;
+  var cv = document.getElementById('tile'), ctx = cv.getContext('2d');
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { c: 'blue', label: 'OpCon', title: 'OpCon Fundamentals', sub: 'Build and Manage Automated Workflows', chip: '' };
+
+  /* images: the infinity pattern and the two logomarks, same origin as this page */
+  function load(src) { return new Promise(function (ok, bad) { var i = new Image(); i.onload = function () { ok(i); }; i.onerror = bad; i.src = src; }); }
+  var assets = Promise.all([load('../assets/infinity-pattern.svg'), load('../assets/continuous-logomark-white.svg'), load('../assets/continuous-logomark-blue.svg')]);
+  var fonts = Promise.all(['500', '600', '700', '800'].map(function (w) { return document.fonts.load(w + ' 40px "BDO Grotesk"'); }).concat([document.fonts.load('500 40px Kaleko')])).catch(function () {});
+  /* product icons for Sky and Night (from the course promos template deck), same origin as this page */
+  var ICONS = {};
+  var icons = Promise.all([['opconMark', 'opcon-mark.svg'], ['opconLogo', 'opcon-logo.svg'], ['paWord', 'permission-assist-wordmark.svg']].map(function (p) {
+    return load('../assets/' + p[1]).then(function (i) { ICONS[p[0]] = i; }, function () {});
+  }));
+
+  /* a CSS-style angled linear gradient over the whole tile */
+  function linear(deg, stops) {
+    var a = deg * Math.PI / 180, dx = Math.sin(a), dy = -Math.cos(a);
+    var len = Math.abs(W * dx) + Math.abs(H * dy), cx = W / 2, cy = H / 2;
+    var g = ctx.createLinearGradient(cx - dx * len / 2, cy - dy * len / 2, cx + dx * len / 2, cy + dy * len / 2);
+    stops.forEach(function (s) { g.addColorStop(s[0], s[1]); });
+    return g;
+  }
+  /* a CSS-style "circle at x% y%" radial gradient, sized to the farthest corner */
+  function radial(px, py, stops) {
+    var x = W * px, y = H * py;
+    var r = Math.max(Math.hypot(x, y), Math.hypot(W - x, y), Math.hypot(x, H - y), Math.hypot(W - x, H - y));
+    var g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    stops.forEach(function (s) { g.addColorStop(s[0], s[1]); });
+    return g;
+  }
+  var tinted = null;
+  function whitePattern(img) {
+    if (tinted) return tinted;
+    var c = document.createElement('canvas'); c.width = 1500; c.height = Math.round(1500 * img.naturalHeight / img.naturalWidth);
+    var x = c.getContext('2d'); x.drawImage(img, 0, 0, c.width, c.height);
+    x.globalCompositeOperation = 'source-in'; x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height);
+    return (tinted = c);
+  }
+
+  var LOOK = {
+    blue: { base: [45, [[.14, '#01111f'], [.70, '#0c3c97'], [1, '#0f4bbd']]],
+      glows: [[.80, .22, [[0, 'rgba(26,107,204,.75)'], [.52, 'rgba(15,75,189,0)']]], [.10, 1.10, [[0, 'rgba(144,200,248,.18)'], [.40, 'rgba(144,200,248,0)']]]],
+      pattern: { alpha: .16, shadow: [0, 30, 40, 'rgba(0,0,0,.45)'], white: false },
+      label: '#90c8f8', title: '#ffffff', sub: '#bcdefb', subWeight: 500, mark: 1,
+      chipBg: '#ffffff', chipFg: '#0c3c97' },
+    beige: { base: [45, [[0, '#dcc6a6'], [.45, '#e9d9c3'], [1, '#f6efe4']]],
+      glows: [[.80, .22, [[0, 'rgba(255,255,255,.75)'], [.52, 'rgba(255,255,255,0)']]], [.10, 1.10, [[0, 'rgba(176,136,86,.22)'], [.42, 'rgba(176,136,86,0)']]]],
+      pattern: { alpha: .55, shadow: [4, 6, 3, 'rgba(122,92,52,.30)'], white: true },
+      label: '#7a5c34', title: '#01111f', sub: '#0f4bbd', subWeight: 600, mark: 2,
+      chipBg: '#01111f', chipFg: '#ffffff' }
+  };
+
+  function font(weight, size, spacing) { ctx.font = weight + ' ' + size + 'px "BDO Grotesk", Inter, Arial, sans-serif'; if ('letterSpacing' in ctx) ctx.letterSpacing = (spacing || 0) + 'px'; }
+  function wrap(text, max) {
+    var out = [];
+    text.split('\n').forEach(function (para) {
+      var words = para.trim().split(/\s+/).filter(Boolean), line = '';
+      words.forEach(function (w) { var t = line ? line + ' ' + w : w; if (line && ctx.measureText(t).width > max) { out.push(line); line = w; } else line = t; });
+      if (line) out.push(line);
+    });
+    return out;
+  }
+  /* draws lines in CSS-like line boxes from top y; returns the height used */
+  function lines(list, x, y, lh) {
+    list.forEach(function (l, i) {
+      var m = ctx.measureText('Hg'), asc = m.fontBoundingBoxAscent || m.actualBoundingBoxAscent, desc = m.fontBoundingBoxDescent || m.actualBoundingBoxDescent;
+      ctx.fillText(l, x, y + i * lh + (lh - (asc + desc)) / 2 + asc);
+    });
+    return list.length * lh;
+  }
+
+  /* Sky and Night: the speech-bubble designs (Learning look, 5 Oct 2026). Text in the upper part,
+     so the bottom left stays clear for the labels the Learning site lays over its course images. */
+  var BLOOK = {
+    sky: { bg: function (x) { var g = x.createLinearGradient(0, 0, W, H); g.addColorStop(0, '#eef6fe'); g.addColorStop(1, '#d6e8fb'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+             var r = x.createRadialGradient(W * .18, H * .1, 0, W * .18, H * .1, W * .55); r.addColorStop(0, 'rgba(255,255,255,.85)'); r.addColorStop(1, 'rgba(255,255,255,0)'); x.fillStyle = r; x.fillRect(0, 0, W, H); },
+           fade: '238,246,254', fill: 'rgba(15,75,189,.14)', fill2: 'rgba(144,200,248,.45)', line: 'rgba(12,60,151,.30)', lineFill: 'rgba(255,255,255,.55)',
+           pill: true, labelColor: '#01111f', labelBorder: '#0c3c97', rule: false, title: '#0c3c97', sub: '#01111f', logo: '#01111f',
+           hero: '#ffffff', heroShadow: 'rgba(12,60,151,.18)', heroIcon: '#0c3c97', chipBg: '#01111f', chipFg: '#ffffff' },
+    night: { bg: function (x) { x.fillStyle = '#01111f'; x.fillRect(0, 0, W, H);
+             var r = x.createRadialGradient(W * .78, H * .32, 0, W * .78, H * .32, W * .62); r.addColorStop(0, 'rgba(15,75,189,.62)'); r.addColorStop(1, 'rgba(15,75,189,0)'); x.fillStyle = r; x.fillRect(0, 0, W, H);
+             var r2 = x.createRadialGradient(W * .05, H * 1.05, 0, W * .05, H * 1.05, W * .4); r2.addColorStop(0, 'rgba(19,39,57,.9)'); r2.addColorStop(1, 'rgba(19,39,57,0)'); x.fillStyle = r2; x.fillRect(0, 0, W, H); },
+           fade: '1,17,31', fill: 'rgba(15,75,189,.45)', fill2: 'rgba(144,200,248,.16)', line: 'rgba(144,200,248,.42)', lineFill: 'rgba(1,17,31,.25)',
+           pill: false, labelColor: '#90c8f8', rule: true, title: '#ffffff', sub: '#bcdefb', logo: '#ffffff',
+           hero: '#0f4bbd', heroShadow: 'rgba(0,0,0,.45)', heroIcon: '#ffffff', chipBg: '#ffffff', chipFg: '#01111f' }
+  };
+  /* [x, y, w, h, kind, tail]: kind 1 = filled, 2 = soft fill, 0 = outline; tail l/r */
+  var BUBBLES = [[930, 70, 250, 150, 1, 'r'], [870, 175, 120, 76, 0, 'l'], [1150, 250, 150, 100, 0, 'l'], [800, 420, 150, 96, 2, 'r'], [1050, 600, 120, 70, 0, 'r'], [760, 40, 86, 54, 0, 'r']];
+  var BUBBLES_NO_HERO = [[1010, 330, 92, 58, 2, 'l'], [1080, 450, 230, 150, 1, 'l']];
+  var HERO = [960, 330, 260, 190];
+  /* a label of OpCon or Permission Assist becomes the product logo; OpCon also gets its symbol in the big bubble */
+  var PRODUCTS = { opcon: { logo: 'opconLogo', mark: 'opconMark', h: 52 }, permissionassist: { logo: 'paWord', mark: null, h: 46 } };
+  function productOf(label) { var k = String(label || '').toLowerCase().replace(/[^a-z]/g, ''); return PRODUCTS[k] || null; }
+  function tint(img, w, h, color) { var c = document.createElement('canvas'); c.width = Math.max(1, Math.ceil(w)); c.height = Math.max(1, Math.ceil(h)); var t = c.getContext('2d'); t.drawImage(img, 0, 0, c.width, c.height); t.globalCompositeOperation = 'source-in'; t.fillStyle = color; t.fillRect(0, 0, c.width, c.height); return c; }
+  function bubblePath(x, X, Y, w, h, r, tail, th) {
+    x.beginPath(); x.moveTo(X + r, Y); x.arcTo(X + w, Y, X + w, Y + h, r); x.arcTo(X + w, Y + h, X, Y + h, r);
+    if (tail === 'r') { x.lineTo(X + w * .86, Y + h); x.lineTo(X + w * .9, Y + h + th); x.lineTo(X + w * .7, Y + h); }
+    else { x.lineTo(X + w * .32, Y + h); x.lineTo(X + w * .1, Y + h + th); x.lineTo(X + w * .16, Y + h); }
+    x.arcTo(X, Y + h, X, Y, r); x.arcTo(X, Y, X + w, Y, r); x.closePath();
+  }
+  function wrapIn(x, text, max) {
+    var out = [];
+    text.split('\n').forEach(function (p) { var line = ''; p.trim().split(/\s+/).filter(Boolean).forEach(function (w) { var t = line ? line + ' ' + w : w; if (line && x.measureText(t).width > max) { out.push(line); line = w; } else line = t; }); if (line) out.push(line); });
+    return out;
+  }
+  function drawBubbles(s, x) {
+    var L = BLOOK[s.c], P = productOf(s.label), hasHero = !!(P && P.mark && ICONS[P.mark]);
+    x.save(); x.clearRect(0, 0, W, H); L.bg(x);
+    BUBBLES.concat(hasHero ? [] : BUBBLES_NO_HERO).forEach(function (b) {
+      bubblePath(x, b[0], b[1], b[2], b[3], Math.min(22, b[3] * .22), b[5], Math.max(16, b[3] * .26));
+      if (b[4] === 0) { x.fillStyle = L.lineFill; x.fill(); x.lineWidth = 2.5; x.strokeStyle = L.line; x.stroke(); }
+      else { x.fillStyle = b[4] === 1 ? L.fill : L.fill2; x.fill(); }
+    });
+    if (hasHero) {
+      var hx = HERO[0], hy = HERO[1], hw = HERO[2], hh = HERO[3];
+      x.save(); x.shadowOffsetY = 16; x.shadowBlur = 34; x.shadowColor = L.heroShadow;
+      x.beginPath(); x.moveTo(hx + 30, hy); x.arcTo(hx + hw, hy, hx + hw, hy + hh, 30); x.arcTo(hx + hw, hy + hh, hx, hy + hh, 30);
+      x.lineTo(hx + hw * .34, hy + hh); x.lineTo(hx + hw * .12, hy + hh + 46); x.lineTo(hx + hw * .18, hy + hh); x.arcTo(hx, hy + hh, hx, hy, 30); x.arcTo(hx, hy, hx + hw, hy, 30); x.closePath();
+      x.fillStyle = L.hero; x.fill(); x.restore();
+      var mk = ICONS[P.mark], ih = hh * .56, iw = ih * mk.naturalWidth / mk.naturalHeight;
+      x.drawImage(tint(mk, iw, ih, L.heroIcon), hx + (hw - iw) / 2, hy + (hh - ih) / 2);
+    }
+    /* soft fade so the bubbles stay behind the text side */
+    var f = x.createLinearGradient(0, 0, W * .62, 0);
+    f.addColorStop(0, 'rgba(' + L.fade + ',.92)'); f.addColorStop(.75, 'rgba(' + L.fade + ',.55)'); f.addColorStop(1, 'rgba(' + L.fade + ',0)');
+    x.fillStyle = f; x.fillRect(0, 0, W * .62, H);
+
+    var X = 84, maxW = 800, top = 64, bottom = H - 170;
+    var logo = P && ICONS[P.logo] ? ICONS[P.logo] : null;
+    var labelH = logo ? P.h + 30 : s.label ? (L.pill ? 60 : 40) + 30 : 0, ruleH = L.rule ? 37 : 0;
+    var title = s.title ? s.title.replace(/\|/g, '\n') : 'Course title';
+    /* the largest title (108 px down to 60) whose block fits above the bottom-left labels, at most 3 lines */
+    var ts, tl, tlh, sl, slh, ss, h;
+    for (ts = 108; ts >= 60; ts -= 4) {
+      x.font = '500 ' + ts + 'px Kaleko, "BDO Grotesk", Inter, Arial, sans-serif'; tl = wrapIn(x, title, maxW); tlh = ts * 1.06;
+      ss = Math.max(32, Math.min(42, Math.round(ts * .42))); x.font = '500 ' + ss + 'px "BDO Grotesk", Inter, Arial, sans-serif'; sl = s.sub ? wrapIn(x, s.sub, 780) : []; slh = ss * 1.25;
+      h = ruleH + labelH + tl.length * tlh + (sl.length ? 24 + sl.length * slh : 0);
+      if (tl.length <= 3 && h <= bottom - top) break;
+    }
+    var y = top + Math.max(0, (bottom - top - h) / 2);
+    if (L.rule) { x.fillStyle = '#fa4716'; x.fillRect(X, y, 120, 7); y += 37; }
+    if (logo) {
+      var lw = P.h * logo.naturalWidth / logo.naturalHeight; x.drawImage(tint(logo, lw, P.h, L.logo), X, y, lw, P.h); y += P.h + 30;
+    } else if (s.label) {
+      x.font = '700 30px "BDO Grotesk", Inter, Arial, sans-serif'; if ('letterSpacing' in x) x.letterSpacing = '1.8px';
+      var lt = s.label.toUpperCase(), lw2 = x.measureText(lt).width; x.textBaseline = 'middle';
+      if (L.pill) { x.lineWidth = 2.5; x.strokeStyle = L.labelBorder; x.beginPath(); if (x.roundRect) x.roundRect(X, y, lw2 + 52, 60, 30); else x.rect(X, y, lw2 + 52, 60); x.stroke(); x.fillStyle = L.labelColor; x.fillText(lt, X + 26, y + 31); y += 90; }
+      else { x.fillStyle = L.labelColor; x.fillText(lt, X, y + 20); y += 70; }
+      if ('letterSpacing' in x) x.letterSpacing = '0px';
+    }
+    x.textBaseline = 'alphabetic'; x.font = '500 ' + ts + 'px Kaleko, "BDO Grotesk", Inter, Arial, sans-serif'; x.fillStyle = L.title;
+    x.save(); if (!s.title) x.globalAlpha = .28; tl.forEach(function (l, i) { x.fillText(l, X - 3, y + i * tlh + ts * .82); }); x.restore(); y += tl.length * tlh;
+    if (sl.length) { y += 24; x.font = '500 ' + ss + 'px "BDO Grotesk", Inter, Arial, sans-serif'; x.fillStyle = L.sub; sl.forEach(function (l, i) { x.fillText(l, X, y + i * slh + ss * .9); }); }
+    if (s.chip) {
+      x.font = '700 30px "BDO Grotesk", Inter, Arial, sans-serif'; var tw = x.measureText(s.chip).width, cw = 46 + tw + 26, ch = 68, cx = W - 64 - cw, cy = 56;
+      x.save(); x.shadowOffsetY = 10; x.shadowBlur = 22; x.shadowColor = 'rgba(1,17,31,.28)'; x.fillStyle = L.chipBg; x.beginPath(); if (x.roundRect) x.roundRect(cx, cy, cw, ch, ch / 2); else x.rect(cx, cy, cw, ch); x.fill(); x.restore();
+      x.fillStyle = '#fa4716'; x.beginPath(); x.arc(cx + 27, cy + ch / 2, 7, 0, Math.PI * 2); x.fill();
+      x.fillStyle = L.chipFg; x.textBaseline = 'middle'; x.fillText(s.chip, cx + 46, cy + ch / 2 + 1); x.textBaseline = 'alphabetic';
+    }
+    x.restore();
+  }
+
+  function draw(s, target) {
+    if (BLOOK[s.c]) { var bx = target || ctx; return Promise.all([assets, icons]).then(function () { drawBubbles(s, bx); }); }
+    var c = target || ctx, L = LOOK[s.c] || LOOK.blue;
+    return Promise.all([assets, icons]).then(function (r) {
+      var a = r[0], saved = ctx; ctx = c;
+      ctx.save(); ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = linear(L.base[0], L.base[1]); ctx.fillRect(0, 0, W, H);
+      L.glows.forEach(function (g) { ctx.fillStyle = radial(g[0], g[1], g[2]); ctx.fillRect(0, 0, W, H); });
+      var pat = a[0], ph = 1500 * pat.naturalHeight / pat.naturalWidth;
+      ctx.save(); ctx.globalAlpha = L.pattern.alpha;
+      ctx.shadowOffsetX = L.pattern.shadow[0]; ctx.shadowOffsetY = L.pattern.shadow[1]; ctx.shadowBlur = L.pattern.shadow[2]; ctx.shadowColor = L.pattern.shadow[3];
+      ctx.drawImage(L.pattern.white ? whitePattern(pat) : pat, W + 560 - 1500, -170, 1500, ph);
+      ctx.restore();
+
+      /* measure the copy block, then lay it out up from the bottom (left 88, bottom 80) */
+      var X = 88, titleSize = 108, len = s.title.replace(/\|/g, '').length;
+      if (len > 34) titleSize = 92; if (len > 52) titleSize = 80;
+      font(800, titleSize, -titleSize * .025);
+      /* an empty title shows a faint stand-in so the preview never looks broken; downloads are blocked */
+      var tl = s.title ? wrap(s.title.replace(/\|/g, '\n'), 1060) : ['Course title'], tlh = titleSize * .98;
+      font(L.subWeight, 40, 0);
+      var sl = s.sub ? wrap(s.sub, 920) : [], slh = 40 * 1.22;
+      /* the mark and label above the title: mark 52 px (was 34), label 44 px (was 30), line 160 x 10 (was 120 x 7); Mark, 6 Oct: bigger */
+      var MK = 52;
+      var h = 10 + 32 + MK + 30 + tl.length * tlh + (sl.length ? 22 + sl.length * slh : 0);
+      var y = H - 80 - h;
+
+      ctx.fillStyle = '#fa4716'; ctx.fillRect(X, y, 160, 10); y += 10 + 32;
+      var mk = a[L.mark], mw = MK * mk.naturalWidth / mk.naturalHeight;
+      /* an OpCon label shows the OpCon logo itself, in the title colour (Mark, 6 Oct) */
+      var opLogo = productOf(s.label) === PRODUCTS.opcon && ICONS.opconLogo;
+      if (opLogo) {
+        var ow = MK * opLogo.naturalWidth / opLogo.naturalHeight; ctx.drawImage(tint(opLogo, ow, MK, L.title), X, y, ow, MK);
+      } else if (s.label) {
+        ctx.drawImage(mk, X, y, mw, MK);
+        font(700, 44, .8); ctx.fillStyle = L.label; lines([s.label], X + mw + 20, y - 4, 58);
+      } else {
+        ctx.drawImage(mk, X, y, mw, MK);
+      }
+      y += MK + 30;
+      font(800, titleSize, -titleSize * .025); ctx.fillStyle = L.title;
+      ctx.save(); if (!s.title) ctx.globalAlpha = .28; y += lines(tl, X - 3, y, tlh); ctx.restore();
+      if (sl.length) { y += 22; font(L.subWeight, 40, 0); ctx.fillStyle = L.sub; lines(sl, X, y, slh); }
+
+      if (s.chip) {
+        font(700, 26, 0); var tw = ctx.measureText(s.chip).width, cw = 20 + 14 + 12 + tw + 24, ch = 26 * 1.5 + 24;
+        var cx = W - 72 - cw, cy = 64;
+        ctx.save(); ctx.shadowOffsetY = 14; ctx.shadowBlur = 26; ctx.shadowColor = 'rgba(1,17,31,.35)';
+        ctx.fillStyle = L.chipBg; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(cx, cy, cw, ch, ch / 2) : ctx.rect(cx, cy, cw, ch); ctx.fill(); ctx.restore();
+        ctx.fillStyle = '#fa4716'; ctx.beginPath(); ctx.arc(cx + 20 + 7, cy + ch / 2, 7, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = L.chipFg; lines([s.chip], cx + 20 + 14 + 12, cy, ch);
+      }
+      ctx.restore();
+      ctx = saved;
+    });
+  }
+
+  /* form wiring */
+  function slug(t) { return (t || 'tile').toLowerCase().replace(/\|/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 70) || 'tile'; }
+  function readForm() { state.label = $('label').value.trim(); state.title = $('title').value.trim(); state.sub = $('sub').value.trim(); state.chip = $('chip').value.trim(); }
+  function writeForm() { $('label').value = state.label; $('title').value = state.title.replace(/\|/g, '\n'); $('sub').value = state.sub; $('chip').value = state.chip;
+    document.querySelectorAll('.sw').forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-c') === state.c ? 'true' : 'false'); }); }
+  var pending = 0;
+  function render() {
+    var my = ++pending;
+    return fonts.then(function () { return draw(state); }).then(function () {
+      if (my !== pending) return;
+      try { $('cardimg').src = cv.toDataURL('image/png'); } catch (e) {}
+      $('cardname').textContent = state.title.replace(/\n|\|/g, ' ') + (state.sub ? ': ' + state.sub : '');
+      $('cardfmt').parentNode.parentNode.classList.toggle('bottom', !!BLOOK[state.c]);
+    });
+  }
+  ['label', 'title', 'sub', 'chip'].forEach(function (id) { $(id).addEventListener('input', function () { readForm(); render(); }); });
+  document.querySelectorAll('.sw').forEach(function (b) { b.addEventListener('click', function () { state.c = b.getAttribute('data-c'); writeForm(); render(); }); });
+  document.querySelectorAll('.presets button').forEach(function (b) { b.addEventListener('click', function () { state.label = b.getAttribute('data-label'); state.c = b.getAttribute('data-c'); writeForm(); render(); }); });
+
+  function save(canvas, name) {
+    return new Promise(function (ok) {
+      canvas.toBlob(function (blob) {
+        var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name + '.png';
+        document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); ok(); }, 400);
+      }, 'image/png');
+    });
+  }
+  function say(t) { $('status').textContent = t; }
+  $('download').addEventListener('click', function () {
+    readForm(); if (!state.title) { say('Add a title first.'); $('title').focus(); return; }
+    readForm(); render().then(function () { return save(cv, slug(state.title)); }).then(function () { say('Downloaded ' + slug(state.title) + '.png'); })
+      .catch(function () { say('Could not create the image. Open the tile maker from its web address, not a saved copy.'); });
+  });
+  $('copylink').addEventListener('click', function () {
+    readForm();
+    var q = new URLSearchParams({ c: state.c, label: state.label, title: state.title.replace(/\n/g, '|'), sub: state.sub, chip: state.chip });
+    var url = location.origin + location.pathname + '?' + q.toString();
+    (navigator.clipboard ? navigator.clipboard.writeText(url) : Promise.reject()).then(function () { say('Link copied. Anyone with it sees this tile.'); }, function () { prompt('Copy this link:', url); });
+  });
+  $('batchgo').addEventListener('click', function () {
+    var rows = $('batch').value.split('\n').map(function (l) { return l.trim(); }).filter(Boolean);
+    if (!rows.length) { say('Add at least one line to make many at once.'); return; }
+    var off = document.createElement('canvas'); off.width = W; off.height = H; var octx = off.getContext('2d');
+    var btn = $('batchgo'); btn.disabled = true;
+    var i = 0, bad = 0;
+    (function next() {
+      if (i >= rows.length) { btn.disabled = false; say('Downloaded ' + (rows.length - bad) + ' tile' + (rows.length - bad === 1 ? '' : 's') + (bad ? '; ' + bad + ' line' + (bad === 1 ? '' : 's') + ' skipped (needs at least a colour and a title).' : '.')); return; }
+      var p = rows[i++].split(',').map(function (x) { return x.trim(); });
+      var cc = (p[0] || '').toLowerCase();
+      var s = { c: /^(beige|sky|night)$/.test(cc) ? cc : 'blue', label: p[1] || '', title: p[2] || '', sub: p[3] || '', chip: p[4] || '' };
+      if (!s.title) { bad++; next(); return; }
+      say('Making tile ' + i + ' of ' + rows.length + '…');
+      fonts.then(function () { return draw(s, octx); }).then(function () { return save(off, slug(s.title)); }).then(next, function () { bad++; next(); });
+    })();
+  });
+
+  /* New: clear every field, the batch list and the address, and start again */
+  $('new').addEventListener('click', function () {
+    state = { c: 'blue', label: '', title: '', sub: '', chip: '' };
+    $('batch').value = ''; say('');
+    if (history.replaceState) history.replaceState(null, '', location.pathname);
+    writeForm(); render(); $('title').focus();
+  });
+
+  /* settings from the address (links made with "Copy a link") */
+  var q = new URLSearchParams(location.search);
+  ['c', 'label', 'title', 'sub', 'chip'].forEach(function (k) { if (q.has(k)) state[k] = q.get(k); });
+  if (!/^(beige|sky|night)$/.test(state.c)) state.c = 'blue';
+  writeForm(); render().then(function () {
+    if (q.has('selftest')) { try { cv.toDataURL('image/png'); document.title = 'SELFTEST OK'; } catch (e) { document.title = 'SELFTEST FAIL ' + e.name; } }
+  });
+})();
+</script>
+</body>
+</html>
