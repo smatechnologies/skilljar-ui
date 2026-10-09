@@ -1,0 +1,373 @@
+<!-- Continuous theme code, hosted on GitHub Pages. Below it, the parts kept from the live theme. -->
+<script src="https://smatechnologies.github.io/skilljar-ui/growth/ct-theme.js"></script>
+<style>
+/* below you will find a set of CSS variables you can edit to style the header */
+body {
+  --header-link-color: #0F4BBD; /* header link text color */
+  --header-link-hover-color: #0C3C97; /* header link hovor color */
+  --header-background-color: #FFFFFF; /* header background color */
+  
+  --header-login-text-color: #FFFFFF; /* login button text color */
+  --header-login-background-color: #0F4BBD; /* login button background color */
+  --header-login-background-hover-color: #0C3C97; /* login button background hover color */
+}
+</style>
+<script>
+/* Continuous template: the menu is built from the site settings (window.CT_MENU);
+   the links below are only used if the settings block is missing. */
+var HEADER_LINKS = window.CT_MENU || {
+  /* start static header link */
+  "Home": {
+      "href": "/",
+      "target": "_self",
+  },
+  /* end static header link */
+  /* start nested header link */
+  /* Continuous template, 28 Sept 2026: the topic pages are now built automatically
+     from course tags (ctsection:<topic>), so the menu points at them. Relative links,
+     so the same menu works on every domain. */
+  "Learning Catalogs": {
+    "nestedLinks": {
+        "All courses": {
+          "href": "/#all",
+          "target": "_self",
+        },
+        "Banking Expertise": {
+          "href": "/#subject-banking",
+          "target": "_self",
+        },
+        "OpCon Training": {
+          "href": "/#subject-opcon",
+          "target": "_self",
+        },
+        "Permission Assist": {
+          "href": "/#subject-permissionassist",
+          "target": "_self",
+        },
+        "Application Support": {
+          "href": "/#subject-appsupport",
+          "target": "_self",
+        },
+        "Live training": {
+          "href": "/#format-live",
+          "target": "_self",
+        },
+    }
+  },
+  /* end nested header link */
+}
+/* DO NOT MODIFY ANYTHING BELOW THIS LINE */
+</script>
+<style>
+#header{
+  background-color: var(--header-background-color) !important;
+}  
+#header .header-nested-wrapper .header-nested-links {
+    background-color: var(--header-background-color);
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 4px 12px 0 rgb(0 0 0 / 15%);
+    left: 16px;
+    opacity: 0;
+    padding: 12px 0;
+    pointer-events: none;
+    position: absolute;
+    top: 100%;
+    transform: translateY(-8px);
+    transition: .4s ease;
+    z-index: 99;
+    border-radius: 0;
+}
+.header-link {
+    color: var(--header-link-color);
+    white-space: nowrap;
+}
+a.header-link:hover {
+    color: var(--header-link-hover-color);
+}
+.header-mobile-dropdown{
+    background-color: var(--header-background-color);
+    top: 45px;
+    position: absolute;
+}
+#header i.fa.fa-caret-down, .header-mobile-dropdown i.fa.fa-caret-down, .header-link .fa-external-link {
+  margin-left: 5px;
+}
+.header-mobile-dropdown .header-link{
+  color: var(--header-link-color);
+}
+#header #header-right .login-link {
+    background-color: var(--header-login-background-color);
+    border-radius: 4px;
+    color: var(--header-login-text-color);
+    margin-right: 0;
+    padding: 12px 24px;
+}
+#header #header-right .login-link:hover {
+    background-color: var(--header-login-background-hover-color);
+}
+i.fa.fa-bars {
+    color: var(--header-login-background-hover-color);
+}
+.header-link:focus{
+  box-shadow: 0 0 0 3px #50aedc;
+}
+
+@media(max-width: 962px){
+  #header-right .header-mobile-menu{
+    display:block;
+  }
+}
+/* Class that closes hover effect on click for links that open in new tab */
+.hidden-link{
+  display: none;
+}
+</style>
+<script>
+(()=>{"use strict";var e={717:(e,n,r)=>{r.d(n,{Z:()=>i});var t=r(645),a=r.n(t)()((function(e){return e[1]}));a.push([e.id,"#header .header-wrapper{display:flex;height:100%;justify-content:space-between;margin:auto;padding:0 24px;position:relative;width:100%}#header .header-link:not(.back-to-catalog){font-size:14px;position:relative}@media(min-width: 1213px){#header .header-link:not(.back-to-catalog){font-size:16px}}#header #header-left{padding-left:0;position:unset}#header #header-left #left-nav-button{padding-left:0}#header #header-left .header-logo-link{padding:0}#header #header-right{align-items:center;display:flex;position:unset}@media only screen and (max-width: 767px){#header #header-right{flex-grow:1;padding-left:24px}}#header #header-right .header-link-container{align-items:center;display:none;flex-shrink:0;margin-right:16px;position:relative}@media(min-width: 962px){#header #header-right .header-link-container{display:flex}}#header #header-right .header-link-container .header-link{margin:0 16px;padding:8px 0}#header #header-right>.headerheight{flex-shrink:0;height:unset}#header #header-right .login-link{display:none;margin-right:0}@media(min-width: 962px){#header #header-right .login-link{display:inline-block}}#header #header-right .header-dropdown-button{display:none;padding:0}@media(min-width: 962px){#header #header-right .header-dropdown-button{display:block}}#header #header-right .header-dropdown-button::before{content:none}#header #header-right .header-dropdown-button img{border-radius:100%}#header #header-right .header-mobile-menu{font-size:26px;margin-left:auto}@media(min-width: 962px){#header #header-right .header-mobile-menu{display:none}}#header #header-right .header-mobile-menu .fa-times{display:none}#header .header-nested-wrapper{align-items:center;padding:8px 0}#header .header-nested-wrapper:hover .header-nested-links,#header .header-nested-wrapper:focus-within .header-nested-links{opacity:100;pointer-events:unset;transform:translateY(-4px)}#header .header-nested-wrapper .header-nested-links{background-color:#fff;border:1px solid rgba(0,0,0,.08);border-radius:0 4px 4px 4px;box-shadow:0 4px 12px 0 rgba(0,0,0,.15);left:16px;opacity:0;padding:12px 0;pointer-events:none;position:absolute;top:100%;transform:translateY(-8px);transition:.4s ease}#header .header-nested-wrapper .header-nested-links .header-link{margin:2px 20px !important}.header-nested-wrapper{display:flex;height:100%;position:relative}.header-nested-wrapper .header-nested-links{align-items:flex-start;display:flex;flex-direction:column;text-align:left}.header-nested-wrapper .header-nested-links .header-link{white-space:nowrap}.header-nested-wrapper .header-nested-links:focus-within{opacity:100;pointer-events:unset;transform:translateY(-4px)}.header-mobile-dropdown{background-color:#fff;box-shadow:0 0 0 9999px rgba(0,0,0,.5);display:none;flex-direction:column;padding-top:12px;position:fixed;top:45px;width:100%;z-index:4}.header-mobile-dropdown .header-link{font-size:18px;padding:20px 32px}.header-mobile-dropdown .header-nested-wrapper{flex-direction:column}.header-mobile-dropdown .header-nested-wrapper .header-nested-links .header-link{margin-left:24px}.header-mobile-dropdown .mobile-login-link{margin-top:12px;padding:20px 32px}.header-mobile-dropdown .mobile-login-link .header-link.login-link,.header-mobile-dropdown .mobile-login-link .signout-link{display:block;text-align:center;width:100%}.mobile-menu-open .header-mobile-menu .fa-bars{display:none}.mobile-menu-open .header-mobile-menu .fa-times{display:block !important}.mobile-menu-open .header-mobile-dropdown{display:flex}",""]);const i=a},26:(e,n,r)=>{r.d(n,{Z:()=>i});var t=r(645),a=r.n(t)()((function(e){return e[1]}));a.push([e.id,"",""]);const i=a},645:e=>{e.exports=function(e){var n=[];return n.toString=function(){return this.map((function(n){var r=e(n);return n[2]?"@media ".concat(n[2]," {").concat(r,"}"):r})).join("")},n.i=function(e,r,t){"string"==typeof e&&(e=[[null,e,""]]);var a={};if(t)for(var i=0;i<this.length;i++){var o=this[i][0];null!=o&&(a[o]=!0)}for(var d=0;d<e.length;d++){var l=[].concat(e[d]);t&&a[l[0]]||(r&&(l[2]?l[2]="".concat(r," and ").concat(l[2]):l[2]=r),n.push(l))}},n}},379:(e,n,r)=>{var t,a=function(){var e={};return function(n){if(void 0===e[n]){var r=document.querySelector(n);if(window.HTMLIFrameElement&&r instanceof window.HTMLIFrameElement)try{r=r.contentDocument.head}catch(e){r=null}e[n]=r}return e[n]}}(),i=[];function o(e){for(var n=-1,r=0;r<i.length;r++)if(i[r].identifier===e){n=r;break}return n}function d(e,n){for(var r={},t=[],a=0;a<e.length;a++){var d=e[a],l=n.base?d[0]+n.base:d[0],s=r[l]||0,h="".concat(l," ").concat(s);r[l]=s+1;var p=o(h),c={css:d[1],media:d[2],sourceMap:d[3]};-1!==p?(i[p].references++,i[p].updater(c)):i.push({identifier:h,updater:m(c,n),references:1}),t.push(h)}return t}function l(e){var n=document.createElement("style"),t=e.attributes||{};if(void 0===t.nonce){var i=r.nc;i&&(t.nonce=i)}if(Object.keys(t).forEach((function(e){n.setAttribute(e,t[e])})),"function"==typeof e.insert)e.insert(n);else{var o=a(e.insert||"head");if(!o)throw new Error("Couldn't find a style target. This probably means that the value for the 'insert' parameter is invalid.");o.appendChild(n)}return n}var s,h=(s=[],function(e,n){return s[e]=n,s.filter(Boolean).join("\n")});function p(e,n,r,t){var a=r?"":t.media?"@media ".concat(t.media," {").concat(t.css,"}"):t.css;if(e.styleSheet)e.styleSheet.cssText=h(n,a);else{var i=document.createTextNode(a),o=e.childNodes;o[n]&&e.removeChild(o[n]),o.length?e.insertBefore(i,o[n]):e.appendChild(i)}}function c(e,n,r){var t=r.css,a=r.media,i=r.sourceMap;if(a?e.setAttribute("media",a):e.removeAttribute("media"),i&&"undefined"!=typeof btoa&&(t+="\n/*# sourceMappingURL=data:application/json;base64,".concat(btoa(unescape(encodeURIComponent(JSON.stringify(i))))," */")),e.styleSheet)e.styleSheet.cssText=t;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(t))}}var f=null,u=0;function m(e,n){var r,t,a;if(n.singleton){var i=u++;r=f||(f=l(n)),t=p.bind(null,r,i,!1),a=p.bind(null,r,i,!0)}else r=l(n),t=c.bind(null,r,n),a=function(){!function(e){if(null===e.parentNode)return!1;e.parentNode.removeChild(e)}(r)};return t(e),function(n){if(n){if(n.css===e.css&&n.media===e.media&&n.sourceMap===e.sourceMap)return;t(e=n)}else a()}}e.exports=function(e,n){(n=n||{}).singleton||"boolean"==typeof n.singleton||(n.singleton=(void 0===t&&(t=Boolean(window&&document&&document.all&&!window.atob)),t));var r=d(e=e||[],n);return function(e){if(e=e||[],"[object Array]"===Object.prototype.toString.call(e)){for(var t=0;t<r.length;t++){var a=o(r[t]);i[a].references--}for(var l=d(e,n),s=0;s<r.length;s++){var h=o(r[s]);0===i[h].references&&(i[h].updater(),i.splice(h,1))}r=l}}}}},n={};function r(t){var a=n[t];if(void 0!==a)return a.exports;var i=n[t]={id:t,exports:{}};return e[t](i,i.exports,r),i.exports}r.n=e=>{var n=e&&e.__esModule?()=>e.default:()=>e;return r.d(n,{a:n}),n},r.d=(e,n)=>{for(var t in n)r.o(n,t)&&!r.o(e,t)&&Object.defineProperty(e,t,{enumerable:!0,get:n[t]})},r.o=(e,n)=>Object.prototype.hasOwnProperty.call(e,n),(()=>{var e=r(379),n=r.n(e),t=r(26);n()(t.Z,{insert:"head",singleton:!1}),t.Z.locals;var a=r(717);function i(e,n){return function(e){if(Array.isArray(e))return e}(e)||function(e,n){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e)){var r=[],t=!0,a=!1,i=void 0;try{for(var o,d=e[Symbol.iterator]();!(t=(o=d.next()).done)&&(r.push(o.value),!n||r.length!==n);t=!0);}catch(e){a=!0,i=e}finally{try{t||null==d.return||d.return()}finally{if(a)throw i}}return r}}(e,n)||function(e,n){if(e){if("string"==typeof e)return o(e,n);var r=Object.prototype.toString.call(e).slice(8,-1);return"Object"===r&&e.constructor&&(r=e.constructor.name),"Map"===r||"Set"===r?Array.from(e):"Arguments"===r||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r)?o(e,n):void 0}}(e,n)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function o(e,n){(null==n||n>e.length)&&(n=e.length);for(var r=0,t=new Array(n);r<n;r++)t[r]=e[r];return t}n()(a.Z,{insert:"head",singleton:!1}),a.Z.locals,$((function(){!function(){$("header").children().wrapAll('<div class="header-wrapper"/>');var e=$('<div class="header-link-container"/>'),n=$('<div class="header-mobile-dropdown"/>');function r(e,n){var r=window.location.pathname==n.href||window.location.href==n.href?"active":"";return $(".sj-page-profile").length&&/^\//.test(n.href)&&(n.href=$(".header-logo-link").attr("href")+n.href.substr(1)),$('<a class="header-link '.concat(r,'">').concat(e,"</a>")).attr(n)}$("header .search-container").length,Object.entries((window.ctLoadSettings&&window.ctLoadSettings()&&window.CT_MENU)||HEADER_LINKS).forEach((function(t,a){var o,d=i(t,2),l=d[0],s=d[1];o="nestedLinks"in s?function(e,n){var t=$('<div class="header-nested-wrapper"/>'),a=$('<div class="header-nested-links"/>');Object.entries(n.nestedLinks).forEach((function(e,n){var t=i(e,2),o=t[0],d=t[1];a.append(r(o,d))}));var o=n.link?$('<a class="header-link">'.concat(e,"</a>")).attr(n.link):'<span class="header-link">'.concat(e,"</span>");return t.append(o,a),t}(l,s):r(l,s),e.append(o.clone()),n.append(o.clone())})),$(".header-link.login-link").length?n.append($('<div class="mobile-login-link"/>').html($(".header-link.login-link").clone())):n.append($("#header-drop .sj-text-my-profile").clone().addClass("header-link"),$('<div class="mobile-login-link"/>').html($("#header-drop .signout-link").clone().addClass("header-link"))),$("#header-right").prepend(e).append('<a class="header-mobile-menu"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>'),$("header").after(n),$(".header-mobile-menu").on("click",(function(){$("body").toggleClass("mobile-menu-open")})),$(document).on("click",(function(e){$(e.target).closest("header").length||$(e.target).closest(".header-mobile-dropdown").length||$("body").removeClass("mobile-menu-open")}))}()}))})()})();
+
+$(document).ready(function(){
+  /* add down arrow to nested header links for UX clarity */
+  $('.header-nested-wrapper > .header-link').each(function() {
+    $(this).html($(this).html() + '<i class="fa fa-caret-down"></i>');
+  });
+})
+/* the javascript below closes the hover effect for links that open in a new tab */
+$(window).on('load', function() {
+  $( ".header-link" ).click(function() {
+    $(this).closest('.header-nested-wrapper').addClass("hidden-link");
+      setTimeout(() => $(".hidden-link").removeClass("hidden-link"), 1);
+  });
+});
+</script>
+<!-- END Nested Header Drop Down links - Add to Global Code Snippet -->
+
+<!-- START Interactive Quick Checks -->
+<!--
+  Turns every static Quick Check block in an HTML lesson into a clickable check.
+
+  WHERE THIS GOES
+  Skilljar dashboard > Theming > your theme > Code Snippets > Global code snippet.
+  Paste this at the END of what is already in that field. Do not remove the
+  existing course separator, coursebox, or survey code.
+
+  NO LESSON EDITS NEEDED
+  It finds a Quick Check by the markup the lessons already ship with:
+    - a paragraph whose only text is "Quick Check"
+    - a <ul> of options inside the same block
+    - the correct option marked with a checkmark (&#10003;)
+    - a paragraph starting with "Why:"
+  If all four are not present, the block is left alone. Nothing else on the
+  page is touched. If this snippet is removed or errors out, every Quick Check
+  falls back to exactly how it renders today.
+
+  BEHAVIOR
+  Learner clicks an option. Wrong turns red and locks, the others stay live so
+  they can try again. Correct turns green, the checkmark comes back, the Why
+  line appears, the block locks. Ungraded. Nothing is tracked or reported.
+
+  This file is deliberately plain ASCII. The checkmark is built with
+  String.fromCharCode so a copy-paste or an editor re-encode cannot mangle it.
+-->
+<style>
+  .cqc-opt {
+    display: block;
+    background: #ffffff;
+    border: 1px solid #cfe6d6;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 8px 0;
+    cursor: pointer;
+    transition: background .15s ease, border-color .15s ease, opacity .2s ease;
+  }
+  .cqc-opt:hover { background: #f4faf6; border-color: #9fd3b3; }
+  .cqc-opt:focus { outline: 2px solid #0f4bbd; outline-offset: 2px; }
+  .cqc-locked { pointer-events: none; }
+  .cqc-dim { opacity: .45; }
+  .cqc-hint {
+    font-size: 13px;
+    color: #5c7a67;
+    margin: 0 0 10px;
+    font-family: 'BDO Grotesk', 'Inter', system-ui, sans-serif;
+  }
+  .cqc-why { transition: opacity .25s ease; }
+</style>
+<script>
+(function () {
+  'use strict';
+
+  /* Shuffle the options on every load.
+     In the source lessons the correct answer sits in the middle slot 143 times
+     out of 156 and in the first slot the other 13, never last. Static that was
+     harmless. Clickable it is not: always picking the middle option would score
+     92 percent. Shuffling removes the pattern without editing any lesson.
+     Set this to false to render the options in their authored order. */
+  var SHUFFLE = true;
+
+  var TICK = String.fromCharCode(10003);
+  var TICK_HTML = '&#10003;';
+  var GREEN = '#2e7d32', GREEN_BG = '#f0faf0';
+  var RED = '#c62828', RED_BG = '#fff5f5';
+  var BODY = '#132739';
+
+  function textOf(el) {
+    return (el.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function childListItems(list) {
+    var out = [];
+    for (var i = 0; i < list.children.length; i++) {
+      if (list.children[i].tagName === 'LI') out.push(list.children[i]);
+    }
+    return out;
+  }
+
+  function stripTick(html) {
+    var s = html.replace(/^\s+/, '');
+    if (s.indexOf(TICK_HTML) === 0) s = s.slice(TICK_HTML.length);
+    else if (s.charAt(0) === TICK) s = s.slice(1);
+    return s.replace(/^(\s|&nbsp;)+/, '');
+  }
+
+  function findBlocks() {
+    var found = [];
+    var paras = document.querySelectorAll('p');
+    for (var i = 0; i < paras.length; i++) {
+      if (textOf(paras[i]).toLowerCase() !== 'quick check') continue;
+      var block = paras[i].parentNode;
+      if (!block || block.nodeType !== 1) continue;
+      if (found.indexOf(block) === -1) found.push(block);
+    }
+    return found;
+  }
+
+  function lock(el) {
+    if (el.className.indexOf('cqc-locked') === -1) el.className += ' cqc-locked';
+    el.setAttribute('tabindex', '-1');
+  }
+
+  function setup(block) {
+    if (block.getAttribute('data-cqc-ready') === '1') return;
+
+    var list = block.querySelector('ul');
+    if (!list) return;
+
+    var opts = childListItems(list);
+    if (opts.length < 2) return;
+
+    var answer = null, i;
+    for (i = 0; i < opts.length; i++) {
+      if (textOf(opts[i]).indexOf(TICK) === 0) { answer = opts[i]; break; }
+    }
+    if (!answer) return;
+
+    var why = null;
+    var paras = block.querySelectorAll('p');
+    for (i = 0; i < paras.length; i++) {
+      if (textOf(paras[i]).toLowerCase().indexOf('why:') === 0) { why = paras[i]; break; }
+    }
+
+    block.setAttribute('data-cqc-ready', '1');
+
+    /* Take the checkmark off the correct option and hold it for later. */
+    var answerHTML = stripTick(answer.innerHTML);
+    answer.innerHTML = answerHTML;
+
+    /* Hide the explanation until they get it right. */
+    if (why) {
+      why.className += ' cqc-why';
+      why.style.display = 'none';
+      why.style.opacity = '0';
+    }
+
+    /* Reorder so the answer is not always in the same slot. */
+    if (SHUFFLE && opts.length > 1) {
+      for (i = opts.length - 1; i > 0; i--) {
+        var r = Math.floor(Math.random() * (i + 1));
+        var swap = opts[i]; opts[i] = opts[r]; opts[r] = swap;
+      }
+      for (i = 0; i < opts.length; i++) list.appendChild(opts[i]);
+    }
+
+    /* Make every option look and read the same, so nothing gives the answer away. */
+    list.style.paddingLeft = '0';
+    list.style.listStyle = 'none';
+    for (i = 0; i < opts.length; i++) {
+      opts[i].className += ' cqc-opt';
+      opts[i].style.color = BODY;
+      opts[i].style.fontWeight = '400';
+      opts[i].setAttribute('role', 'button');
+      opts[i].setAttribute('tabindex', '0');
+    }
+
+    var hint = document.createElement('p');
+    hint.className = 'cqc-hint';
+    hint.appendChild(document.createTextNode('Pick an answer.'));
+    list.parentNode.insertBefore(hint, list);
+
+    var solved = false;
+
+    function answerWith(opt) {
+      if (solved || opt.className.indexOf('cqc-locked') !== -1) return;
+
+      if (opt === answer) {
+        solved = true;
+        opt.innerHTML = TICK_HTML + '&nbsp; ' + answerHTML;
+        opt.style.borderColor = GREEN;
+        opt.style.background = GREEN_BG;
+        opt.style.color = GREEN;
+        opt.style.fontWeight = '600';
+        lock(opt);
+
+        for (var k = 0; k < opts.length; k++) {
+          if (opts[k] === opt) continue;
+          if (opts[k].style.borderColor !== RED) opts[k].className += ' cqc-dim';
+          lock(opts[k]);
+        }
+
+        hint.textContent = 'Correct.';
+        hint.style.color = GREEN;
+
+        if (why) {
+          why.style.display = '';
+          setTimeout(function () { why.style.opacity = '1'; }, 20);
+        }
+      } else {
+        opt.style.borderColor = RED;
+        opt.style.background = RED_BG;
+        opt.style.color = RED;
+        lock(opt);
+        hint.textContent = 'Not quite. Try another one.';
+        hint.style.color = RED;
+      }
+    }
+
+    for (i = 0; i < opts.length; i++) {
+      (function (opt) {
+        opt.addEventListener('click', function () { answerWith(opt); });
+        opt.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ' || e.keyCode === 13 || e.keyCode === 32) {
+            e.preventDefault();
+            answerWith(opt);
+          }
+        });
+      })(opts[i]);
+    }
+  }
+
+  function run() {
+    var blocks = findBlocks();
+    for (var i = 0; i < blocks.length; i++) {
+      try { setup(blocks[i]); } catch (err) { /* leave that block static */ }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run);
+  } else {
+    run();
+  }
+  /* Re-scan in case the lesson body paints late. Setup is idempotent. */
+  setTimeout(run, 400);
+  setTimeout(run, 1500);
+})();
+</script>

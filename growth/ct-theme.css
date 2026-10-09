@@ -1,0 +1,1666 @@
+/* Continuous Skilljar theme. Built from source/global-head-snippet.html by tools/build.pl; do not edit here. */
+/* BDO Grotesk and Inter, served by continuous.com (CORS open, checked 28 Sept 2026) */
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Regular.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Medium.woff2) format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "BDO Grotesk"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/BDOGrotesk-Bold.woff2) format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Inter"; src: url(https://continuous.com/wp-content/themes/continuous/dist/assets/Inter-Regular.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+/* ==========================================================================
+   Continuous Skilljar template (test-continuous.skilljar.com, then Growth and Learn)
+   Source of truth: BRAND-EXTRACTION.md in this folder (taken from continuous.com).
+   Paste this file inside a <style> element in the theme's Global head snippet
+   (see theme/global-head-snippet.html). Skilljar loads its own platform CSS
+   and a generated colour stylesheet first, so several rules carry !important.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Continuous palette (BRAND-EXTRACTION.md). Names kept from the VisualCron
+     build so every rule below reads the same settings. */
+  --ct-blue-800: #0f4bbd;   /* Sapphire: links, buttons, brand blue */
+  --ct-blue-900: #0c3c97;   /* Sapphire 120: hover and pressed */
+  --ct-blue-600: #1a6bcc;   /* Sapphire mid: progress fill */
+  --ct-blue-300: #a6d3f9;   /* Sky 80 */
+  --ct-blue-100: #bcdefb;   /* Sky 60: soft borders */
+  --ct-blue-50: #e3f1fd;    /* Iceberg: cards, tint bands */
+  --ct-sky: #90c8f8;        /* Day Sky */
+  --ct-orange: #fa4716;     /* Reddish Orange: the one main call to action. White text only at 18px bold and up (3.5:1) */
+  --ct-orange-dark: #d93d10;
+  --ct-bone: #e9d9c3;       /* warm band */
+  --ct-navy: #01111f;       /* Black Pearl */
+  --ct-navy-2: #132739;     /* start of the dark gradients */
+  --ct-gray-900: #01111f;   /* headings and text */
+  --ct-gray-700: #34414c;   /* body copy, nav */
+  --ct-gray-600: #677079;   /* secondary text */
+  --ct-gray-300: #99a0a5;
+  --ct-gray-100: #cccfd2;   /* borders */
+  --ct-gray-10: #f4faff;    /* page background (Sky 5) */
+  --ct-white: #ffffff;
+  --ct-status-success: #2e7d32;
+  --ct-status-error: #c62828;
+
+  --ct-font-head: "BDO Grotesk", "Inter", Arial, sans-serif;
+  --ct-font-body: "BDO Grotesk", "Inter", Arial, sans-serif;
+
+  --ct-header-h: 72px;
+  --ct-radius: 6px;         /* buttons, small cards */
+  --ct-radius-lg: 12px;     /* cards and panels */
+  --ct-shadow-hover: 0 8px 24px rgba(1, 17, 31, 0.10);
+  --ct-max-w: 1200px;
+
+  --ct-grad-dark: linear-gradient(135deg, #132739 0%, #01111f 50%);
+  --ct-grad-brand: linear-gradient(45deg, #01111f 14.64%, #0f4bbd 85.36%);
+  --ct-glow: radial-gradient(circle at 72% 35%, rgba(15, 75, 189, 0.55) 0%, rgba(15, 75, 189, 0) 59%);
+  --ct-grad-light: linear-gradient(180deg, #ffffff 0%, #e9f4fe 100%);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base type
+   -------------------------------------------------------------------------- */
+html { overflow-x: hidden; }
+
+body {
+  font-family: var(--ct-font-body) !important;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ct-gray-900) !important;
+  background: var(--ct-white);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ch-header,
+.coursebox-text {
+  font-family: var(--ct-font-head) !important;
+  font-weight: 700 !important;
+  color: var(--ct-gray-900);
+  margin-top: 0;
+}
+h1 { font-size: 40px; line-height: 1.1; margin-bottom: 16px; }
+h2 { font-size: 32px; line-height: 1.15; margin-bottom: 16px; }
+h3 { font-size: 24px; line-height: 1.2; margin-bottom: 12px; }
+h4 { font-size: 20px; line-height: 1.25; margin-bottom: 8px; }
+h5,
+h6 { font-size: 16px; line-height: 1.5; }
+
+p { font-size: 16px; line-height: 1.5; margin-bottom: 16px; }
+small,
+.small { font-size: 14px; line-height: 1.45; color: var(--ct-gray-600); }
+
+/* --------------------------------------------------------------------------
+   3. Links
+   -------------------------------------------------------------------------- */
+a,
+.link-color,
+.theme-color,
+a.theme-no-hover {
+  color: var(--ct-blue-800) !important;
+  text-decoration: none;
+}
+a:hover,
+a:focus,
+a.theme-no-hover:hover,
+a.theme-no-hover:focus {
+  color: var(--ct-blue-900) !important;
+  text-decoration: underline;
+}
+.theme-color-bg { background-color: var(--ct-blue-800) !important; }
+.theme-color-border-hover:hover,
+.theme-color-border-hover:focus { border-color: var(--ct-gray-100) !important; }
+
+/* Focus ring for keyboard users */
+a:focus-visible,
+button:focus-visible,
+.button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--ct-blue-800) !important;
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   Skilljar's own buttons (register, purchase, lesson navigation, forms)
+   and the .ct-btn classes used in authored HTML blocks.
+   -------------------------------------------------------------------------- */
+button,
+.button,
+a.button,
+input[type="submit"],
+input[type="button"],
+.ct-btn,
+.purchase-button,
+.wide-button,
+.primaryAction {
+  font-family: var(--ct-font-body) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 1.25 !important;
+  text-align: center;
+  text-decoration: none !important;
+  display: inline-block;
+  padding: 12px 20px !important;
+  min-height: 44px;
+  border: 0 !important;
+  border-radius: var(--ct-radius) !important;
+  background-color: var(--ct-blue-800) !important;
+  color: var(--ct-white) !important;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  box-shadow: none !important;
+}
+button:hover,
+button:focus,
+.button:hover,
+.button:focus,
+a.button:hover,
+a.button:focus,
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+.ct-btn:hover,
+.ct-btn:focus,
+.purchase-button:hover,
+.purchase-button:focus,
+.primaryAction:hover,
+.primaryAction:focus {
+  background-color: var(--ct-blue-900) !important;
+  color: var(--ct-white) !important;
+  text-decoration: none !important;
+}
+.button-background { background-color: var(--ct-blue-800) !important; }
+.button-border-color { border-color: var(--ct-blue-800) !important; }
+
+/* The one main call to action (hero): Continuous orange, as on continuous.com.
+   White on orange is 3.5:1, so it stays 18px bold, which counts as large text. */
+.ct-btn--primary,
+.ct-btn--primary:visited {
+  background-color: var(--ct-orange) !important;
+  color: var(--ct-white) !important;
+  font-size: 18px !important;
+  padding: 13px 24px !important;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ct-btn--primary:hover,
+.ct-btn--primary:focus {
+  background-color: var(--ct-orange-dark) !important;
+  color: var(--ct-white) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(250, 71, 22, 0.35) !important;
+}
+/* Secondary: Black Pearl */
+.ct-btn--secondary,
+.button.secondary,
+.ct-btn--secondary:visited {
+  background-color: var(--ct-navy) !important;
+  color: var(--ct-white) !important;
+}
+.ct-btn--secondary:hover,
+.ct-btn--secondary:focus,
+.button.secondary:hover,
+.button.secondary:focus {
+  background-color: var(--ct-navy-2) !important;
+  color: var(--ct-white) !important;
+}
+
+/* Tertiary: outline */
+.ct-btn--tertiary,
+.button.tertiary,
+.socialaccount_providers button {
+  background-color: transparent !important;
+  color: var(--ct-blue-800) !important;
+  border: 2px solid var(--ct-blue-800) !important;
+  padding: 10px 18px !important;
+}
+.ct-btn--tertiary:hover,
+.ct-btn--tertiary:focus,
+.button.tertiary:hover,
+.button.tertiary:focus,
+.socialaccount_providers button:hover,
+.socialaccount_providers button:focus {
+  background-color: var(--ct-blue-50) !important;
+  color: var(--ct-blue-900) !important;
+  border-color: var(--ct-blue-900) !important;
+}
+
+/* Disabled */
+button:disabled,
+.button:disabled,
+.button.disabled,
+button.disabled,
+button:disabled:hover,
+.button:disabled:hover,
+.button.disabled:hover {
+  background-color: var(--ct-gray-100) !important;
+  color: var(--ct-gray-600) !important;
+  cursor: not-allowed;
+}
+
+/* --------------------------------------------------------------------------
+   5. Header
+   Skilljar: <header id="header"> is position:fixed and 45px tall by default.
+   -------------------------------------------------------------------------- */
+#header,
+#header-mobile-dropdown {
+  background-color: var(--ct-white) !important;
+  color: var(--ct-gray-700) !important;
+}
+#header {
+  height: var(--ct-header-h) !important;
+  border-bottom: 1px solid var(--ct-gray-100);
+  box-shadow: none !important;
+}
+#header-left,
+#header-right,
+#header .header-links-container,
+#header .headerheight {
+  height: var(--ct-header-h) !important;
+  display: flex;
+  align-items: center;
+}
+#header .header-logo-link {
+  display: flex;
+  align-items: center;
+  height: var(--ct-header-h);
+  padding: 0 8px;
+}
+#header .header-center-img {
+  max-height: 40px !important;
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+}
+#header .header-link,
+#header .header-left .left-nav-toggle,
+#header .header-dash-dropdown,
+#header-mobile-dropdown .header-link {
+  font-family: var(--ct-font-body) !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  color: var(--ct-gray-700) !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  height: var(--ct-header-h);
+  padding: 0 16px;
+  box-shadow: inset 0 3px 0 transparent;
+  transition: color 0.15s ease, box-shadow 0.15s ease;
+}
+#header .header-link:hover,
+#header .header-link:focus,
+#header .header-link[aria-expanded="true"] {
+  color: var(--ct-blue-800) !important;
+  box-shadow: inset 0 3px 0 var(--ct-blue-800);
+  text-decoration: none !important;
+}
+#header .header-dropdown-button:before { border-color: var(--ct-gray-700) transparent transparent transparent !important; }
+.sj-nested-header-links #header .header-dropdown__menu {
+  background-color: var(--ct-white) !important;
+  border: 1px solid var(--ct-gray-100);
+  border-radius: var(--ct-radius);
+  box-shadow: var(--ct-shadow-hover);
+}
+#header .header-dropdown__link { color: var(--ct-gray-900) !important; font-weight: 400 !important; }
+#header .header-dropdown__link:hover { color: var(--ct-blue-800) !important; background: var(--ct-blue-50); }
+
+/* Skilljar puts a second search button beside the logo on catalog pages. The
+   header search on the right already covers it, so it goes on wider screens.
+   Phones keep it (it is the menu there), and lesson pages keep it (it opens the
+   lesson list). */
+@media only screen and (min-width: 768px) {
+  body.sj-page-catalog #left-nav-button { display: none !important; }
+}
+
+/* Sign In: a Sapphire button, not a bare header link */
+#header #header-right .login-link,
+#header .header-link.login-link {
+  height: auto !important;
+  align-self: center;
+  padding: 10px 20px !important;
+  margin-left: 16px;
+  border-radius: var(--ct-radius);
+  background-color: var(--ct-blue-800) !important;
+  color: var(--ct-white) !important;
+  box-shadow: none !important;
+}
+#header #header-right .login-link:hover,
+#header #header-right .login-link:focus,
+#header .header-link.login-link:hover,
+#header .header-link.login-link:focus {
+  background-color: var(--ct-blue-900) !important;
+  color: var(--ct-white) !important;
+  box-shadow: none !important;
+}
+/* The site settings block in the footer is for the code, not for learners */
+.ct-settings { display: none !important; }
+/* Rounded corners throughout, as on continuous.com */
+.ct-role { border-radius: var(--ct-radius-lg); }
+.ct-role .ct-icon,
+.ct-section__icon,
+.ct-subhero__icon { border-radius: var(--ct-radius); }
+.ct-section__all { border-radius: var(--ct-radius); }
+/* Course descriptions stop after four lines so cards stay even */
+a.coursebox-container .coursebox-text-description {
+  display: -webkit-box !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}
+
+/* Push page content below the taller header */
+#skilljar-content,
+#lp-wrapper { padding-top: var(--ct-header-h) !important; }
+#skilljar-content { margin-bottom: 0 !important; }
+
+/* --------------------------------------------------------------------------
+   6. Catalog page
+   -------------------------------------------------------------------------- */
+body.sj-page-catalog #skilljar-content { background: var(--ct-gray-10); }
+
+/* Skilljar's built-in catalog header (title and subtitle fields) */
+.catalog-header {
+  background: var(--ct-blue-50);
+  padding: 48px 24px !important;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: calc(50vw - 50% + 24px) !important;
+  padding-right: calc(50vw - 50% + 24px) !important;
+}
+.catalog-header .ch-background-wrapper { background: none !important; }
+.catalog-header .ch-header {
+  font-size: 40px !important;
+  line-height: 1.1 !important;
+  color: var(--ct-gray-900) !important;
+  margin-bottom: 12px;
+}
+.catalog-header .ch-sub-header {
+  font-family: var(--ct-font-body) !important;
+  font-size: 18px !important;
+  color: var(--ct-gray-900) !important;
+  max-width: 640px;
+}
+
+/* Catalog header image (Skilljar "Catalog header image" field): the Academy banner */
+.catalog-header img.catalog-header-image {
+  display: block;
+  width: 100%;
+  max-width: var(--ct-max-w);
+  height: auto;
+  margin: 0 auto;
+  border-radius: var(--ct-radius);
+}
+.ct-sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Authored catalog header block (theme/catalog-header.html).
+   Sits inside .catalog-header, which already runs edge to edge with the tint. */
+
+/* Skilljar sizes the catalog column and the tiles with JavaScript. Fix both in CSS
+   so the layout is the same with or without it. */
+.catalog-center-width {
+  width: 100% !important;
+  max-width: var(--ct-max-w) !important;
+  margin: 0 auto !important;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+#catalog-content { padding-top: 32px; padding-bottom: 48px; }
+#catalog-courses {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 24px;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+#catalog-courses a.coursebox-container {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100%;
+  margin: 0 !important;
+  height: auto !important;
+  display: block !important;
+}
+body,
+#skilljar-content,
+#catalog-content,
+.catalog-center-width { min-width: 0 !important; }
+a.coursebox-container .coursebox-text,
+a.coursebox-container .coursebox-text-description { max-width: 100%; white-space: normal; overflow-wrap: anywhere; }
+
+/* Course tiles */
+a.coursebox-container {
+  position: relative;
+  background: var(--ct-white) !important;
+  border: 1px solid var(--ct-gray-100) !important;
+  border-radius: var(--ct-radius) !important;
+  padding: 0 0 56px 0 !important;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  color: var(--ct-gray-900) !important;
+  text-decoration: none !important;
+}
+a.coursebox-container:hover,
+a.coursebox-container:focus {
+  transform: translateY(-2px);
+  box-shadow: var(--ct-shadow-hover);
+  border-color: var(--ct-gray-100) !important;
+  text-decoration: none !important;
+}
+a.coursebox-container .coursebox-image {
+  height: auto !important;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 0;
+  background-color: var(--ct-blue-50) !important; /* shows when a course has no image */
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-size: 34% !important;
+}
+a.coursebox-container.course .coursebox-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+a.coursebox-container .coursebox-text {
+  font-size: 20px !important;
+  line-height: 1.25 !important;
+  color: var(--ct-gray-900) !important;
+  padding: 16px 16px 6px !important;
+}
+a.coursebox-container .coursebox-text-description {
+  font-family: var(--ct-font-body) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+  color: var(--ct-gray-600) !important;
+  padding: 0 16px !important;
+  margin-bottom: 8px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+a.coursebox-container .storefront-price {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--ct-blue-800) !important;
+  background: none !important;
+  padding: 0 !important;
+}
+/* "Start" pill in place of Skilljar's FREE (the code snippet swaps the text) */
+a.coursebox-container .storefront-price.ct-start-cta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: var(--ct-blue-800);
+  color: var(--ct-white);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 0.15s ease;
+}
+a.coursebox-container .storefront-price.ct-start-cta span::after { content: "\2192"; }
+a.coursebox-container:hover .storefront-price.ct-start-cta span,
+a.coursebox-container:focus-visible .storefront-price.ct-start-cta span { background: var(--ct-blue-900); }
+a.coursebox-container .course-time.coursebox-callout,
+a.coursebox-container .coursebox-callout {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  font-size: 14px;
+  color: var(--ct-gray-600) !important;
+  background: none !important;
+}
+/* Tags are for sorting (section:, vcrole:, vcfeatured...), not for learners to read. */
+a.coursebox-container .coursebox-tags { display: none !important; }
+a.coursebox-container .coursebox-tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ct-gray-700);
+  background: var(--ct-gray-10);
+  border-radius: var(--ct-radius);
+  padding: 2px 8px;
+  margin: 0 6px 6px 0;
+}
+
+/* Tile ribbons: Skilljar rotates .sj-ribbon into the top-right corner. */
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon {
+  font-family: var(--ct-font-body) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ct-white) !important;
+  background: var(--ct-gray-700) !important;
+  border-color: transparent !important;
+  border-radius: var(--ct-radius) !important;
+}
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon-registered,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon-registered { background: var(--ct-blue-800) !important; }
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon-complete,
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon-passed,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon-complete,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon-passed { background: var(--ct-status-success) !important; }
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon-failed,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon-failed { background: var(--ct-status-error) !important; }
+a.coursebox-container .sj-ribbon-wrapper .sj-ribbon-get-started,
+a.coursebox-container .sj-course-ribbon-wrapper .sj-course-ribbon-get-started { background: var(--ct-gray-700) !important; }
+
+/* Catalog filter sidebar and search */
+#catalog-left-nav { font-size: 14px; }
+#catalog-left-nav a { color: var(--ct-gray-700) !important; }
+#catalog-left-nav a:hover,
+#catalog-left-nav .active a { color: var(--ct-blue-800) !important; }
+
+/* --------------------------------------------------------------------------
+   7. Course detail page
+   -------------------------------------------------------------------------- */
+.top-row-grey,
+.grey-bg,
+.top-row-white-v2 { background-color: var(--ct-gray-10) !important; }
+body.sj-page-detail .top-row-grey { padding-top: 40px; padding-bottom: 40px; }
+.dp-promo-image img { border-radius: var(--ct-radius); }
+.dp-summary-wrapper { border: 0 !important; box-shadow: none !important; }
+.dp-summary-wrapper h1 { font-size: 40px; line-height: 1.1; color: var(--ct-gray-900); }
+.sj-course-info-wrapper h2 {
+  font-family: var(--ct-font-body) !important;
+  font-weight: 400 !important;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ct-gray-600);
+  margin-bottom: 24px;
+}
+.purchase-button-wrapper .button { width: auto; min-width: 180px; }
+.dp-summary-wrapper p.signin { font-size: 14px; color: var(--ct-gray-600); margin-top: 12px; }
+
+#dp-details { padding: 48px 0 64px; }
+#dp-details h3 { font-size: 24px; color: var(--ct-gray-900); padding-bottom: 12px; border-bottom: 1px solid var(--ct-gray-100); margin-bottom: 16px; }
+.dp-long-description,
+.dp-long-description p,
+.dp-long-description span { font-family: var(--ct-font-body); font-size: 16px !important; line-height: 1.6; color: var(--ct-gray-900) !important; }
+.dp-long-description h3,
+.dp-long-description h3 span { font-size: 20px !important; color: var(--ct-gray-900) !important; border: 0; text-transform: none; }
+
+ul.dp-curriculum { list-style: none; margin: 0; padding: 0; }
+ul.dp-curriculum li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 8px !important;
+  font-size: 16px;
+  border-bottom: 1px solid var(--ct-gray-100);
+  color: var(--ct-gray-900);
+  cursor: pointer;
+}
+ul.dp-curriculum li:hover { background: var(--ct-blue-50); }
+ul.dp-curriculum li.section {
+  font-family: var(--ct-font-head) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  padding: 24px 8px 8px !important;
+  border-bottom: 0;
+  cursor: default;
+  background: none !important;
+}
+ul.dp-curriculum li .type-icon { color: var(--ct-gray-600); flex: 0 0 24px; }
+ul.dp-curriculum li.completed .type-icon,
+ul.dp-curriculum li .fa-check-circle { color: var(--ct-status-success) !important; }
+.sj-course-time,
+.sj-lesson-time { font-size: 14px; color: var(--ct-gray-600); font-weight: 400; }
+
+/* Phone layout of the course page: Foundation section tabs */
+.section-container.tabs { border: 0 !important; }
+.section-container.tabs > section > .title,
+.section-container.tabs > .section > .title {
+  background: var(--ct-gray-10) !important;
+  border: 1px solid var(--ct-gray-100) !important;
+  border-bottom: 0 !important;
+}
+.section-container.tabs > section.active > .title,
+.section-container.tabs > .section.active > .title {
+  background: var(--ct-white) !important;
+  border-bottom: 3px solid var(--ct-blue-800) !important;
+}
+.section-container.tabs .title a,
+.section-container.tabs .title a b {
+  font-family: var(--ct-font-head) !important;
+  font-size: 16px !important;
+  color: var(--ct-gray-900) !important;
+  text-decoration: none !important;
+}
+.section-container.tabs > section > .content,
+.section-container.tabs > .section > .content {
+  border: 1px solid var(--ct-gray-100) !important;
+  border-top: 0 !important;
+  padding: 16px !important;
+  background: var(--ct-white);
+}
+
+/* Progress bars (Foundation .progress .meter) */
+.progress { background: var(--ct-gray-100) !important; border: 0 !important; height: 8px !important; border-radius: var(--ct-radius); overflow: hidden; }
+.progress .meter { background: var(--ct-blue-600) !important; }
+
+/* --------------------------------------------------------------------------
+   8. Lesson page
+   Skilljar ships a dark lesson chrome. This theme uses a light one.
+   -------------------------------------------------------------------------- */
+#lp-wrapper,
+.lesson-page {
+  background-color: var(--ct-white) !important;
+  color: var(--ct-gray-900) !important;
+}
+.lp-left-nav,
+#lp-left-nav {
+  background: var(--ct-gray-10) !important;
+  border-right: 1px solid var(--ct-gray-100);
+  color: var(--ct-gray-900) !important;
+}
+.lp-left-nav .left-nav-return,
+#lp-left-nav .left-nav-return {
+  color: var(--ct-blue-800) !important;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 16px !important;
+  margin: 0 !important;
+  display: block;
+}
+.lp-left-nav .lesson-section,
+#lp-left-nav .lesson-section,
+.lp-left-nav .section {
+  color: var(--ct-gray-600) !important;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 20px 16px 6px !important;
+  background: none !important;
+}
+.lp-left-nav .lesson,
+#lp-left-nav .lesson {
+  color: var(--ct-gray-900) !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  padding: 10px 16px 10px 20px !important;
+  border-left: 3px solid transparent;
+  background: none !important;
+}
+.lp-left-nav .lesson:hover,
+#lp-left-nav .lesson:hover,
+#lp-left-nav .lesson:active {
+  background: var(--ct-blue-50) !important;
+  color: var(--ct-gray-900) !important;
+}
+#lp-left-nav .lesson-active,
+#lp-left-nav .current-item,
+.lp-left-nav .lesson-active {
+  background: var(--ct-white) !important;
+  color: var(--ct-blue-800) !important;
+  font-weight: 700;
+  border-left-color: var(--ct-blue-800) !important;
+}
+#lp-left-nav .lesson.completed,
+#lp-left-nav .lesson .fa-check-circle { color: var(--ct-gray-600) !important; }
+#lp-left-nav .lesson .fa-check-circle { color: var(--ct-status-success) !important; }
+
+#lesson-main,
+#lesson-main-inner,
+#lesson-main-content,
+#lesson-body {
+  background: var(--ct-white) !important;
+  color: var(--ct-gray-900) !important;
+}
+#lesson-body { padding: 32px !important; }
+.lesson-top,
+.lesson-title-label { color: var(--ct-gray-900) !important; }
+.lesson-top h1,
+.lesson-top .lesson-title-label { font-family: var(--ct-font-head) !important; font-size: 32px; font-weight: 700; }
+#details-pane,
+.details-pane {
+  background: var(--ct-gray-10) !important;
+  border-left: 1px solid var(--ct-gray-100);
+  color: var(--ct-gray-900) !important;
+}
+#details-pane h3,
+.details-pane h3 { font-size: 20px; }
+#scorm_content_frame { border: 0; background: var(--ct-white); }
+/* Video lessons: the 16:9 player is sized by its width, so on a wide screen it
+   grew taller than the window and the lesson had to be scrolled. Cap the width
+   by the window height instead, so the header, the lesson title, the whole
+   video, the line under it and the lesson footer fit on one screen. 310px is the
+   space measured on a live lesson (26 Sept): title block and divider, padding,
+   the caption line and the 64px lesson footer, plus about 40px to spare. Left-aligned
+   so it lines up with the lesson title. */
+@supports (height: 100dvh) {
+  .ct-video { max-width: max(320px, calc((100dvh - var(--ct-header-h) - 310px) * 16 / 9)); }
+}
+
+#lp-footer {
+  background-color: var(--ct-white) !important;
+  border-top: 1px solid var(--ct-gray-100);
+  height: 64px !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px !important;
+}
+#lp-footer .button,
+#lp-footer a.button { margin: 0 !important; }
+#lp-footer .prev-lesson-link,
+#lp-footer .previous-lesson-link,
+#lp-footer .left .button,
+#lp-footer .button.secondary {
+  background: transparent !important;
+  color: var(--ct-blue-800) !important;
+  border: 2px solid var(--ct-blue-800) !important;
+  padding: 10px 18px !important;
+}
+#lp-footer .prev-lesson-link:hover,
+#lp-footer .previous-lesson-link:hover,
+#lp-footer .left .button:hover {
+  background: var(--ct-blue-50) !important;
+  color: var(--ct-blue-900) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. Forms, sign in, sign up
+   -------------------------------------------------------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+select,
+textarea {
+  height: 44px;
+  padding: 0 12px !important;
+  font-family: var(--ct-font-body) !important;
+  font-size: 16px !important;
+  color: var(--ct-gray-900) !important;
+  background: var(--ct-white) !important;
+  border: 1px solid var(--ct-gray-100) !important;
+  border-radius: var(--ct-radius) !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+textarea { height: auto; padding: 12px !important; }
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--ct-blue-800) !important;
+  box-shadow: 0 0 0 2px var(--ct-white), 0 0 0 4px var(--ct-blue-800) !important;
+  outline: none !important;
+}
+label { font-size: 14px !important; font-weight: 700 !important; color: var(--ct-gray-900) !important; margin-bottom: 4px; display: block; }
+.error,
+small.error,
+.form-error { color: var(--ct-status-error) !important; background: none !important; font-size: 14px; }
+input.error,
+.error input { border-color: var(--ct-status-error) !important; }
+input[type="radio"]:checked,
+input[type="checkbox"]:checked { border-color: var(--ct-blue-800) !important; background-color: var(--ct-blue-800) !important; }
+input[type="checkbox"]:focus { box-shadow: 0 0 0 3px var(--ct-blue-100) !important; }
+
+body.sj-page-login #skilljar-content,
+body.sj-page-signup #skilljar-content,
+body.sj-page-login .white-bg,
+body.sj-page-signup .white-bg { background: var(--ct-gray-10) !important; }
+#login-tab-container { padding-top: 32px; }
+#login-tab-container .login-tab {
+  font-family: var(--ct-font-head) !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  padding: 8px 20px !important;
+}
+#login-tab-container .login-tab span { color: var(--ct-gray-900); }
+#login-tab-container .login-tab a,
+#login-tab-container .login-tab a span { color: var(--ct-blue-800) !important; }
+#login-tab-container img.tab-marker { display: none !important; }
+#login-content {
+  background: var(--ct-white);
+  border: 1px solid var(--ct-gray-100);
+  border-radius: var(--ct-radius);
+  max-width: 960px;
+  margin: 16px auto 48px;
+  padding: 32px 24px;
+}
+#login-content .loginNote { color: var(--ct-gray-600); font-size: 14px; }
+#login-content .forgot-password { display: inline-block; margin-left: 16px; font-size: 14px; }
+.socialaccount_providers ul { list-style: none; margin: 0; padding: 0; }
+.socialaccount_providers li { margin-bottom: 12px; }
+.socialaccount_providers h4 { font-family: var(--ct-font-body) !important; font-size: 14px; color: var(--ct-gray-600); font-weight: 700; }
+/* Skilljar colours provider buttons red and blue with white text; make them outline buttons.
+   Selector depth matches Skilljar's ".socialaccount_providers ul button" rule so ours wins. */
+.socialaccount_providers ul { padding-left: 0 !important; }
+.socialaccount_providers ul li { padding-left: 0 !important; min-width: 0 !important; }
+.socialaccount_providers ul li button,
+.socialaccount_providers ul button {
+  width: 100%;
+  height: auto !important;
+  min-width: 0 !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  text-indent: 0 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  color: var(--ct-blue-800) !important;
+  border: 2px solid var(--ct-blue-800) !important;
+  overflow: visible !important;
+}
+.socialaccount_providers ul li button:hover,
+.socialaccount_providers ul li button:focus {
+  background-color: var(--ct-blue-50) !important;
+  color: var(--ct-blue-900) !important;
+}
+.socialaccount_providers ul button:before { width: auto !important; margin-right: 8px; }
+
+/* --------------------------------------------------------------------------
+   10. Footer
+   Skilljar renders <footer id="ep-footer"> (copyright, language, powered by).
+   The authored block theme/footer.html (.ct-footer) sits above it.
+   -------------------------------------------------------------------------- */
+/* As on continuous.com: dark gradient, white logo, four link columns, and the
+   huge faint wordmark along the bottom (loaded from continuous.com). */
+.ct-footer {
+  background: linear-gradient(180deg, var(--ct-navy-2) 0%, var(--ct-navy) 100%);
+  color: var(--ct-white);
+  font-family: var(--ct-font-body);
+  padding: 64px 24px 0;
+  overflow: hidden;
+}
+.ct-footer__inner {
+  max-width: var(--ct-max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+.ct-footer__logo { display: block; height: 32px; }
+.ct-footer__brand img { height: 32px; width: auto; display: block; }
+.ct-footer__tag { color: var(--ct-gray-300); font-size: 14px; line-height: 1.6; margin: 20px 0 0; max-width: 300px; }
+.ct-footer__wordmark {
+  max-width: var(--ct-max-w);
+  height: 150px;
+  margin: 40px auto 0;
+  background: url("https://continuous.com/wp-content/uploads/2026/06/Footer-%C2%B7-BigName-Wordmark.png") center bottom / contain no-repeat;
+  opacity: 0.9;
+}
+.ct-footer h4 {
+  font-family: var(--ct-font-body) !important;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ct-white);
+  margin: 0 0 12px;
+}
+.ct-footer ul { list-style: none; margin: 0; padding: 0; }
+.ct-footer li a { color: var(--ct-gray-300) !important; font-size: 14px; line-height: 2.1; text-decoration: none; }
+.ct-footer li a:hover,
+.ct-footer li a:focus { color: var(--ct-white) !important; text-decoration: underline; }
+
+#ep-footer {
+  background-color: var(--ct-navy) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+  height: auto !important;
+  padding: 12px 24px !important;
+  color: var(--ct-gray-300) !important;
+  font-size: 14px;
+}
+#ep-footer a,
+#ep-footer .link-color,
+#ep-footer .fa { color: var(--ct-gray-300) !important; }
+#ep-footer a:hover { color: var(--ct-white) !important; }
+#ep-footer ul { margin: 0; }
+#ep-footer ul li { color: var(--ct-gray-300); font-size: 14px; }
+#ep-footer select { height: 32px; font-size: 14px !important; background: var(--ct-navy) !important; color: var(--ct-gray-300) !important; border-color: rgba(255, 255, 255, 0.24) !important; }
+#ep-footer #powered-by,
+#ep-footer #powered-by a,
+#ep-footer .sj-text-powered-by { color: var(--ct-gray-300) !important; opacity: 0.9; }
+
+/* --------------------------------------------------------------------------
+   11. Callouts and misc
+   -------------------------------------------------------------------------- */
+
+.alert-box { border-radius: var(--ct-radius) !important; font-size: 14px; }
+.alert-box.alert { background: #fdecea !important; border-color: var(--ct-status-error) !important; color: var(--ct-status-error) !important; }
+.alert-box.success { background: #e8f5e9 !important; border-color: var(--ct-status-success) !important; color: var(--ct-status-success) !important; }
+
+.tooltip { background: var(--ct-gray-900) !important; border-color: var(--ct-gray-900) !important; color: var(--ct-white) !important; border-radius: var(--ct-radius); }
+
+/* --------------------------------------------------------------------------
+   12. Catalog page in the visualcron.com style
+   Hero block (theme/catalog-header.html), section headings and card tiles
+   (added by theme/visualcron-skilljar.js), and the tile card look itself.
+   -------------------------------------------------------------------------- */
+
+/* Hero (Mark, 8 Oct): laid out like the VisualCron Academy and Learning headers: words on
+   the left, a panel on the right holding the black Continuous infinity mark, on a plain
+   pale blue band. Replaces the continuous.com photo hero. The pill label, two-tone
+   headline and orange call to action stay. */
+.ct-hero {
+  background: var(--ct-blue-50);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 64px calc(50vw - 50% + 24px);
+}
+.ct-hero__inner {
+  max-width: calc(var(--ct-max-w) - 48px); /* lines up with the padded catalog column below */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: center;
+}
+.ct-hero__copy { max-width: 560px; }
+.ct-hero__media {
+  background: linear-gradient(180deg, var(--ct-white) 0%, var(--ct-blue-100) 100%);
+  border: 1px solid var(--ct-blue-100);
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-hero__media img { width: 55%; height: auto; display: block; }
+.ct-hero__eyebrow {
+  display: inline-block;
+  font-family: var(--ct-font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ct-white);
+  background: var(--ct-blue-800);
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin: 0 0 24px;
+}
+.ct-hero__title {
+  font-family: var(--ct-font-head) !important;
+  font-size: 48px !important;
+  font-weight: 700 !important;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ct-gray-900);
+  margin: 0 0 20px;
+}
+.ct-hero__title .ct-accent { color: var(--ct-blue-800); display: block; }
+.ct-hero__lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--ct-gray-700);
+  max-width: 520px;
+  margin: 0 0 32px;
+}
+.ct-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
+.ct-hero__actions .ct-btn { margin: 0; }
+.ct-hero__link { font-weight: 700; color: var(--ct-gray-900) !important; text-decoration: none !important; }
+.ct-hero__link:hover,
+.ct-hero__link:focus { color: var(--ct-blue-800) !important; }
+/* Below 900px the panel drops away and the words take the full width */
+@media only screen and (max-width: 899px) {
+  .ct-hero__inner { grid-template-columns: minmax(0, 1fr); }
+  .ct-hero__media { display: none; }
+}
+
+/* When the hero block is used, hide the older tint band spacing */
+.catalog-header:has(.ct-hero) { background: transparent; padding: 0 !important; }
+
+/* Section headings inserted by the script */
+.ct-section,
+.ct-section__grid { width: 100%; min-width: 0; box-sizing: border-box; }
+.ct-section { display: block; padding: 40px 0 8px; }
+.ct-section:first-child { padding-top: 16px; }
+.ct-section__head { margin-bottom: 20px; }
+.ct-section__title {
+  font-size: 30px !important;
+  line-height: 1.15;
+  color: var(--ct-gray-900);
+  margin: 0 0 6px;
+}
+.ct-section__lead { font-size: 16px; color: var(--ct-gray-700); margin: 0; }
+.ct-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: 24px;
+}
+
+/* Card tiles: the website's benefit-card look for courses without a promo image */
+#catalog-courses a.coursebox-container.ct-card {
+  background: linear-gradient(180deg, var(--ct-blue-50) 0%, var(--ct-white) 100%) !important;
+  border: 1px solid var(--ct-blue-100) !important;
+  border-radius: var(--ct-radius-lg) !important;
+  padding: 28px 24px 56px !important;
+}
+#catalog-courses a.coursebox-container.ct-card:hover,
+#catalog-courses a.coursebox-container.ct-card:focus {
+  border-color: var(--ct-blue-800) !important;
+  box-shadow: none;
+  transform: none;
+}
+#catalog-courses a.coursebox-container.ct-card .coursebox-image {
+  aspect-ratio: auto;
+  width: 48px;
+  height: 48px !important;
+  margin: 0 0 20px;
+  border-radius: 0;
+  background-color: transparent !important;
+  background-size: contain !important;
+  background-position: left center !important;
+  /* Icon set by the script through --ct-tile-icon */
+  background-image: var(--ct-tile-icon, none) !important;
+}
+#catalog-courses a.coursebox-container.ct-card .coursebox-text {
+  color: var(--ct-blue-800) !important;
+  font-size: 22px !important;
+  padding: 0 0 8px !important;
+}
+#catalog-courses a.coursebox-container.ct-card .coursebox-text-description {
+  color: var(--ct-gray-900) !important;
+  font-size: 15px !important;
+  padding: 0 !important;
+  -webkit-line-clamp: 4;
+}
+#catalog-courses a.coursebox-container.ct-card .storefront-price { left: 24px; bottom: 20px; }
+#catalog-courses a.coursebox-container.ct-card .course-time.coursebox-callout,
+#catalog-courses a.coursebox-container.ct-card .coursebox-callout { right: 24px; bottom: 20px; }
+
+/* Rounded cards, as on continuous.com */
+a.coursebox-container { border-radius: var(--ct-radius-lg) !important; }
+a.coursebox-container .coursebox-image { border-radius: 0; }
+
+/* --------------------------------------------------------------------------
+   14. Catalog: row headers, featured carousel, video tiles, hero mark
+   Added 25 September 2026 (delight and polish pass). Stays within the
+   visualcron.com look: square corners, the blue and yellow palette, the 3 px
+   blue tab accent from the website's navigation.
+   -------------------------------------------------------------------------- */
+
+/* Browser surfaces carry the brand too */
+::selection { background: var(--ct-blue-100); color: var(--ct-gray-900); }
+a { text-underline-offset: 3px; }
+input,
+textarea { caret-color: var(--ct-blue-800); }
+input[type="checkbox"],
+input[type="radio"] { accent-color: var(--ct-blue-800); }
+
+/* Row headers. The category labels have to be findable at a glance, so each
+   row opens with a rule that carries the website's 3 px blue tab accent, then
+   the section's icon, title and lead as one unit, and the course count on the
+   right. More space above the header than below it. */
+.ct-section { padding: 48px 0 8px; }
+.ct-section:first-child { padding-top: 24px; }
+.ct-section__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--ct-gray-100);
+}
+.ct-section__head::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 56px;
+  height: 3px;
+  background: var(--ct-blue-800);
+}
+.ct-section__icon {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ct-blue-50);
+  border: 1px solid var(--ct-blue-100);
+}
+.ct-section__icon img { width: 28px; height: 28px; display: block; }
+.ct-section__text { flex: 1 1 auto; min-width: 0; }
+.ct-section__title { font-weight: 700; margin: 0 0 4px !important; }
+.ct-section__lead { line-height: 1.45; }
+
+/* Featured Courses carousel, built by the Global code snippet from tiles tagged
+   "vcfeatured". Modelled on Skilljar's own academy carousel: the row fades out at
+   the edge that has more to show and a round arrow sits over the cards there;
+   both disappear when there is nothing left to scroll to. */
+.ct-featured { display: block; box-sizing: border-box; padding: 32px 0 8px; }
+.ct-featured .ct-section__head { border-top: 0; padding-top: 0; }
+.ct-featured__viewport { position: relative; }
+/* The row bleeds 6 px each side so a focused card's ring is not clipped by the
+   scroll container, while the cards still line up with the heading. */
+.ct-featured__track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-left: 6px;
+  margin: 0 -6px;
+  padding: 6px 6px 24px;
+  scrollbar-width: none;
+}
+.ct-featured__track::-webkit-scrollbar { display: none; }
+/* About three and a half cards at desktop width, one and a peek on a phone */
+.ct-featured__track > a.coursebox-container {
+  flex: 0 0 min(300px, 82%) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  margin: 0 !important;
+  height: auto !important;
+  display: block !important;
+  float: none !important;
+  scroll-snap-align: start;
+}
+/* Edge fades, white to match the Featured band */
+.ct-featured__viewport::before,
+.ct-featured__viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 24px;
+  width: 96px;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.ct-featured__viewport::before { left: -6px; background: linear-gradient(90deg, var(--ct-white) 0%, rgba(255, 255, 255, 0) 100%); }
+.ct-featured__viewport::after { right: -6px; background: linear-gradient(270deg, var(--ct-white) 0%, rgba(255, 255, 255, 0) 100%); }
+.ct-featured__viewport.is-start::before,
+.ct-featured__viewport.is-end::after { opacity: 0; }
+/* Arrows over the cards, vertically centred on them */
+.ct-featured .ct-featured__btn {
+  position: absolute !important;
+  top: calc(50% - 12px);
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid var(--ct-gray-100) !important;
+  background: var(--ct-white) !important;
+  background-image: none !important;
+  color: var(--ct-blue-800) !important;
+  box-shadow: 0 2px 8px rgba(47, 53, 56, 0.16) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+}
+.ct-featured .ct-featured__btn--prev { left: 8px; }
+.ct-featured .ct-featured__btn--next { right: 8px; }
+.ct-featured .ct-featured__btn:hover:not(:disabled) {
+  background: var(--ct-blue-800) !important;
+  border-color: var(--ct-blue-800) !important;
+  color: var(--ct-white) !important;
+}
+.ct-featured .ct-featured__btn:disabled { opacity: 0; pointer-events: none; }
+.ct-featured .ct-featured__btn svg { width: 18px !important; height: 18px !important; display: block !important; fill: none !important; stroke: currentColor !important; }
+
+a.coursebox-container .coursebox-image { position: relative; }
+/* Reduced motion: keep the state changes, drop the movement */
+@media (prefers-reduced-motion: reduce) {
+  a.coursebox-container:hover,
+a.coursebox-container:focus { transform: none !important; }
+  .ct-featured__track { scroll-behavior: auto; }
+}
+
+@media only screen and (max-width: 640px) {
+  .ct-section { padding-top: 40px; }
+  .ct-section__head { gap: 12px; align-items: flex-start; }
+  .ct-section__icon { width: 40px; height: 40px; }
+  .ct-section__icon img { width: 24px; height: 24px; }
+}
+
+/* --------------------------------------------------------------------------
+   15. Featured band, sub-catalog header, "See all" links
+   Added 25 September 2026 after reviewing the live site. Skilljar's own
+   .top-row h1 / .top-row h2 rules were shrinking every heading on the catalog
+   (hero title to 26px, row titles to 17px), which is what made the row labels
+   easy to miss. Heading sizes now carry !important so the design sizes win.
+   -------------------------------------------------------------------------- */
+
+/* Featured Courses: its own white band under the hero, a larger title with the
+   brand's yellow highlight accent, a Featured ribbon on each card, and slightly
+   larger cards than the rows below. */
+.ct-featured {
+  width: auto;
+  background: var(--ct-white);
+  border-bottom: 1px solid var(--ct-gray-100);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 40px calc(50vw - 50%) 16px;
+}
+.ct-featured .ct-section__head { padding-top: 20px; margin-bottom: 20px; }
+.ct-featured .ct-section__head::before {
+  content: "";
+  top: 0;
+  width: 56px;
+  height: 4px;
+  background: var(--ct-orange);
+}
+.ct-featured .ct-section__title { font-size: 34px !important; margin: 0 !important; }
+/* Card labels in the Featured row, added by the code snippet from the course tags:
+   vcnew = New (brand yellow), vcpopular = Popular (VisualCron blue), neither = Featured. */
+.ct-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: calc(100% - 24px);
+  gap: 6px;
+  pointer-events: none;
+}
+.ct-badge {
+  font-family: var(--ct-font-body);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  box-shadow: 0 1px 3px rgba(1, 17, 31, 0.25);
+}
+.ct-badge--new { background: var(--ct-orange-dark); color: var(--ct-white); }   /* darker orange: white text passes 4.5:1 */
+.ct-badge--popular { background: var(--ct-blue-800); color: var(--ct-white); }
+.ct-badge--featured { background: var(--ct-navy); color: var(--ct-white); }
+.ct-badge { border-radius: var(--ct-radius); }
+/* Format labels, on every card (test:format:live / ondemand) */
+.ct-badge--format-live { background: var(--ct-navy); color: var(--ct-white); display: inline-flex; align-items: center; gap: 6px; }
+.ct-badge--format-live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ct-orange); }
+.ct-badge--format-ondemand { background: var(--ct-white); color: var(--ct-navy); }
+.ct-badge--c-white { background: var(--ct-white); color: var(--ct-navy); }
+.ct-badge--c-navy { background: var(--ct-navy); color: var(--ct-white); }
+.ct-badge--c-blue { background: var(--ct-blue-800); color: var(--ct-white); }
+.ct-badge--c-orange { background: var(--ct-orange-dark); color: var(--ct-white); }
+.ct-badge--c-bone { background: var(--ct-bone); color: var(--ct-navy); }
+.ct-badge--c-sky { background: var(--ct-blue-100); color: var(--ct-navy); }
+
+/* "See all N courses" on a row header, when that row has its own sub-catalog.
+   Tertiary button style from the design system. */
+.ct-section__all {
+  flex: none;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ct-blue-800) !important;
+  background: transparent;
+  border: 2px solid var(--ct-blue-800);
+  padding: 10px 14px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+.ct-section__all:hover,
+.ct-section__all:focus { background: var(--ct-blue-50); }
+
+/* Sub-catalog header: the same pale blue band as the home hero, shorter, with a
+   way back to all courses. Paste theme/subcatalog-start-header-READY.html into
+   the sub-catalog page's Header HTML. */
+.catalog-header:has(.ct-subhero) { background: transparent; padding: 0 !important; }
+.ct-subhero {
+  background: var(--ct-blue-50);
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 32px calc(50vw - 50% + 24px) 40px;
+}
+.ct-subhero__inner { max-width: calc(var(--ct-max-w) - 48px); margin: 0 auto; }
+.ct-subhero__crumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--ct-gray-700);
+  margin: 0 0 20px;
+}
+.ct-subhero__crumbs a { color: var(--ct-blue-800) !important; font-weight: 700; }
+.ct-subhero__row { display: flex; align-items: center; gap: 20px; }
+.ct-subhero__icon {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ct-white);
+  border: 1px solid var(--ct-blue-100);
+}
+.ct-subhero__icon img { width: 36px; height: 36px; display: block; }
+.ct-subhero__title {
+  font-family: var(--ct-font-head) !important;
+  font-size: 40px !important;
+  line-height: 1.1;
+  color: var(--ct-gray-900);
+  margin: 0 0 6px !important;
+}
+.ct-subhero__lead { font-size: 18px; line-height: 1.5; color: var(--ct-gray-700); margin: 0; }
+
+@media only screen and (max-width: 640px) {
+  .ct-featured { padding-top: 32px; }
+  .ct-featured .ct-section__title { font-size: 28px !important; }
+  .ct-section__all { display: none; }
+  .ct-subhero { padding: 24px calc(50vw - 50% + 16px) 32px; }
+  .ct-subhero__row { gap: 14px; align-items: flex-start; }
+  .ct-subhero__icon { width: 48px; height: 48px; }
+  .ct-subhero__icon img { width: 28px; height: 28px; }
+  .ct-subhero__title { font-size: 30px !important; }
+  .ct-subhero__lead { font-size: 16px; }
+}
+
+/* --------------------------------------------------------------------------
+   16. Documentation banner, built by the Global code snippet under the rows
+   -------------------------------------------------------------------------- */
+.ct-sr-only { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* --------------------------------------------------------------------------
+   17. Home front door: place to start, popular subjects, roles, and the
+   subject / role views. Built by the Global code snippet on the home catalog.
+   -------------------------------------------------------------------------- */
+body.ct-home-on #catalog-courses,
+body.ct-view #catalog-courses,
+body.ct-view .ct-featured,
+body.ct-view .ct-hero { display: none !important; }
+body.ct-view #catalog-content { padding-top: 0; }
+.ct-home { display: block; }
+
+/* Looking for a place to start? */
+.ct-start {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) 3fr;
+  gap: 40px;
+  align-items: start;
+  padding: 56px 0;
+}
+.ct-start__title {
+  font-family: var(--ct-font-head) !important;
+  font-size: 34px !important;
+  line-height: 1.15;
+  color: var(--ct-gray-900);
+  margin: 0 0 12px !important;
+}
+.ct-start__lead { font-size: 16px; line-height: 1.55; color: var(--ct-gray-700); margin: 0 0 24px; }
+.ct-start__intro .ct-btn { margin: 0; }
+.ct-start__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.ct-start__grid > a.coursebox-container,
+.ct-view__grid > a.coursebox-container {
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  float: none !important;
+  display: block !important;
+}
+
+/* Find training for your role */
+.ct-roles {
+  text-align: center;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 64px calc(50vw - 50% + 24px);
+  background: linear-gradient(35deg, var(--ct-blue-50) 0%, var(--ct-white) 100%);
+}
+.ct-roles__title {
+  font-family: var(--ct-font-head) !important;
+  font-size: 34px !important;
+  line-height: 1.15;
+  color: var(--ct-gray-900);
+  margin: 0 0 10px !important;
+}
+.ct-roles__lead { font-size: 16px; color: var(--ct-gray-700); margin: 0 0 32px; }
+.ct-roles__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: calc(var(--ct-max-w) - 48px);
+  margin: 0 auto;
+  text-align: left;
+}
+.ct-role {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--ct-white);
+  border: 1px solid var(--ct-gray-100);
+  box-shadow: 0 2px 10px rgba(47, 53, 56, 0.06);
+  color: var(--ct-gray-900) !important;
+  text-decoration: none !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.ct-role:hover,
+.ct-role:focus-visible {
+  border-color: var(--ct-blue-800);
+  box-shadow: 0 6px 18px rgba(0, 119, 186, 0.14);
+  transform: translateY(-2px);
+}
+.ct-role .ct-icon {
+  flex: none;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ct-blue-50);
+}
+.ct-role .ct-icon img { width: 26px; height: 26px; display: block; }
+.ct-role__text { display: flex; flex-direction: column; gap: 4px; }
+.ct-role__name { font-size: 16px; font-weight: 700; line-height: 1.35; }
+.ct-role__count { font-size: 14px; color: var(--ct-gray-700); }
+.ct-role:hover .ct-role__count,
+.ct-role:focus-visible .ct-role__count { color: var(--ct-blue-800); }
+
+/* Subject and role views */
+.ct-view__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; padding: 40px 0 16px; }
+.ct-view__body { padding: 8px 0 16px; }
+.ct-view__body .ct-section .ct-view__grid { padding: 0 0 8px; }
+.ct-roles__more { margin: 28px 0 0; text-align: center; }
+.ct-roles__more .ct-btn { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-role { transition: none; }
+  .ct-role:hover,
+.ct-role:focus-visible { transform: none; }
+}
+@media only screen and (max-width: 1000px) {
+  .ct-start { grid-template-columns: 1fr; gap: 24px; }
+  .ct-roles__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ct-view__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media only screen and (max-width: 640px) {
+  .ct-start { padding: 40px 0; }
+  .ct-start__grid,
+.ct-roles__list,
+.ct-view__grid { grid-template-columns: 1fr; }
+  .ct-start__title,
+.ct-roles__title { font-size: 28px !important; }
+  .ct-roles { padding: 48px calc(50vw - 50% + 16px); }
+}
+
+/* --------------------------------------------------------------------------
+   13. Responsive
+   -------------------------------------------------------------------------- */
+@media only screen and (max-width: 1024px) {
+  .ct-footer__inner { grid-template-columns: 1fr 1fr; }
+}
+@media only screen and (max-width: 767px) {
+  /* Skilljar moves header links into its mobile dropdown; keep the desktop container hidden. */
+  #header #header-right .header-links-container { display: none !important; }
+  #header-mobile-dropdown .header-link { height: 48px; border-bottom: 1px solid var(--ct-gray-100); }
+}
+@media only screen and (max-width: 640px) {
+  :root { --ct-header-h: 56px; }
+  #header .header-center-img { max-height: 32px !important; height: 32px; }
+  h1,
+.catalog-header .ch-header,
+.dp-summary-wrapper h1 { font-size: 32px !important; }
+  h2 { font-size: 26px; }
+  h3 { font-size: 22px; }
+  .catalog-header { padding-top: 24px !important; padding-bottom: 32px !important; padding-left: calc(50vw - 50% + 16px) !important; padding-right: calc(50vw - 50% + 16px) !important; }
+  .ct-hero { padding: 32px calc(50vw - 50% + 16px); }
+  .ct-hero__inner { grid-template-columns: 1fr; gap: 24px; }
+  .ct-hero__title { font-size: 32px !important; }
+  .ct-section__title { font-size: 26px !important; }
+  .catalog-center-width { padding-left: 16px; padding-right: 16px; }
+  .ct-footer__inner { grid-template-columns: 1fr; gap: 24px; }
+  #lesson-body { padding: 20px !important; }
+  #lp-footer { padding: 0 12px !important; }
+}
+
+/* Learning path pages: numbered steps and a guide. The code adds .ct-steps to the course list. */
+.ct-path-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: var(--ct-blue-800); color: #fff; font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; border-radius: 99px; padding: 6px 14px; margin-bottom: 14px; }
+.ct-path-eyebrow svg { width: 16px; height: 16px; }
+.ct-path-meta { font-size: 16px; color: var(--ct-gray-700); margin: -4px 0 20px; }
+.ct-path-guide { max-width: 880px; margin: 8px auto 32px; padding: 24px 28px; background: var(--ct-blue-50); border: 1px solid var(--ct-blue-100); border-radius: var(--ct-radius-lg); }
+.ct-path-guide h2 { font-size: 24px; margin: 0 0 8px; }
+.ct-path-guide p { font-size: 16px; line-height: 1.55; color: var(--ct-gray-700); margin: 0; }
+.ct-path-guide ol { margin: 16px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 24px; }
+.ct-path-guide li { font-size: 15px; display: flex; gap: 8px; }
+.ct-path-guide li b { flex: 0 0 24px; height: 24px; border-radius: 50%; background: var(--ct-blue-800); color: #fff; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+#catalog-courses.ct-steps { display: block !important; max-width: 880px; margin: 0 auto 64px; position: relative; counter-reset: s; padding-left: 64px; box-sizing: border-box; }
+.ct-steps::before { content: ""; position: absolute; left: 21px; top: 24px; bottom: 24px; width: 2px; background: var(--ct-blue-100); }
+#catalog-courses.ct-steps > a { counter-increment: s; display: grid !important; grid-template-columns: 220px 1fr; grid-template-rows: auto auto 1fr; column-gap: 20px; align-items: start; overflow: visible; float: none !important; box-sizing: border-box; width: 100% !important; margin: 0 0 20px !important; padding: 16px !important; min-height: 0 !important; }
+.ct-steps > a::before { content: counter(s); position: absolute; left: -64px; top: 16px; width: 44px; height: 44px; box-sizing: border-box; border-radius: 50%; background: #fff; border: 2px solid var(--ct-blue-800); color: var(--ct-blue-800); font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.ct-steps > a.ct-step-done::before { content: "\2713"; background: var(--ct-status-success); border-color: var(--ct-status-success); color: #fff; }
+.ct-steps > a::after, .ct-steps .storefront-price, .ct-steps .coursebox-callout, .ct-steps .coursebox-tags, .ct-steps .sj-ribbon-wrapper, .ct-steps .clearfix { display: none !important; }
+.ct-steps > a .coursebox-image { grid-column: 1; grid-row: 1 / span 3; width: 220px !important; margin: 0 !important; float: none !important; border-radius: var(--ct-radius) !important; }
+.ct-steps > a .coursebox-image img { height: auto !important; aspect-ratio: 16 / 9; object-fit: cover; }
+.ct-step-label { grid-column: 2; grid-row: 1; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ct-blue-800); margin-bottom: 4px; }
+.ct-steps > a .coursebox-text { grid-column: 2; grid-row: 2; padding: 0 0 6px !important; margin: 0 !important; text-indent: 0 !important; height: auto !important; width: auto !important; float: none !important; }
+.ct-steps > a .coursebox-text-description { grid-column: 2; grid-row: 3; padding: 0 !important; margin: 0 !important; width: auto !important; float: none !important; height: auto !important; max-height: none !important; display: -webkit-box !important; -webkit-box-orient: vertical; -webkit-line-clamp: 3 !important; overflow: hidden !important; }
+.ct-steps > a .course-overview { grid-column: 1 / -1; grid-row: 4; position: static !important; width: auto !important; margin: 14px 0 0 !important; padding: 10px 0 0 !important; border: 0 !important; border-top: 1px solid var(--ct-gray-100) !important; }
+.ct-steps .course-overview__toggle { position: static !important; padding: 0 !important; margin: 0 !important; }
+.ct-steps .course-overview__toggle__text { font-size: 14px; font-weight: 700; }
+@media (max-width: 640px) {
+  .ct-path-guide ol { grid-template-columns: 1fr; }
+  #catalog-courses.ct-steps { padding-left: 48px; }
+  .ct-steps::before { left: 15px; }
+  #catalog-courses.ct-steps > a { grid-template-columns: 1fr; grid-template-rows: none; }
+  .ct-steps > a::before { left: -48px; width: 32px; height: 32px; font-size: 14px; }
+  .ct-steps > a .coursebox-image { grid-row: auto; width: 100% !important; margin-bottom: 12px !important; aspect-ratio: auto !important; height: auto !important; }
+  .ct-steps > a .coursebox-image img { aspect-ratio: auto; object-fit: contain !important; }
+  .ct-step-label, .ct-steps > a .coursebox-text, .ct-steps > a .coursebox-text-description, .ct-steps > a .course-overview { grid-column: 1; grid-row: auto; }
+}
+/* --------------------------------------------------------------------------
+   19. Lighthouse look (Merly, 9 Oct 2026: "for growth build out, use this for theme and color")
+   Colours sampled from her screenshot of Lighthouse (lighthouse.continuous.com): cream page and
+   panels with a thin peach outline, dark navy-to-blue gradients for the banner and tiles, white
+   cards with a blue top line, navy headings. Everything above stays; this section overrides it.
+   -------------------------------------------------------------------------- */
+:root {
+  --lh-page: #fcf8f2;        /* page */
+  --lh-panel: #f8f1e7;       /* cream panels */
+  --lh-outline: #f4dabe;     /* thin peach outline */
+  --lh-navy: #0c2a6e;        /* headings, wordmark navy */
+  --lh-ink: #253345;         /* body text */
+  --lh-blue: #1748c8;        /* card top lines, links */
+  --lh-grad-dark: linear-gradient(100deg, #071221 0%, #0b1e3e 45%, #0a2968 100%);
+  --lh-grad-mid: linear-gradient(90deg, #0c2a6f 0%, #123a8e 100%);
+  --lh-grad-bright: linear-gradient(90deg, #1e4fd8 0%, #5a8cee 100%);
+  --ct-gray-10: var(--lh-page);
+  --ct-blue-800: var(--lh-blue);
+}
+body, #skilljar-content, body.sj-page-catalog #skilljar-content { background: var(--lh-page) !important; }
+h1, h2, h3, .ct-section__title, .ct-start__title, .ct-roles__title, .ct-subhero__title { color: var(--lh-navy); }
+
+/* Header banner: Lighthouse's dark navy card */
+.ct-hero { background: transparent !important; padding-top: 32px; padding-bottom: 40px; }
+.ct-hero__inner { background: var(--lh-grad-dark); border-radius: 14px; box-shadow: 0 12px 32px rgba(7, 18, 33, 0.22); padding: 48px 56px; box-sizing: border-box; }
+.ct-hero__eyebrow { background: transparent !important; color: #c9d6ee !important; letter-spacing: 0.18em; padding: 0 !important; border: 0 !important; }
+.ct-hero__title, .ct-hero__title .ct-accent { color: var(--ct-white) !important; }
+.ct-hero__lead { color: #d6e0f0 !important; }
+.ct-hero__link { color: var(--ct-white) !important; }
+.ct-hero__link:hover, .ct-hero__link:focus { color: #c9d6ee !important; }
+.ct-hero__media { background: rgba(255, 255, 255, 0.06) !important; border: 1px solid rgba(255, 255, 255, 0.16) !important; border-radius: 12px; }
+.ct-hero__media img { filter: brightness(0) invert(1); }
+
+/* Buttons: the bright Lighthouse blue */
+.ct-btn--primary, a.ct-btn--primary { background: var(--lh-grad-bright) !important; border-color: transparent !important; color: var(--ct-white) !important; }
+.ct-btn--primary:hover, a.ct-btn--primary:hover, .ct-btn--primary:focus-visible { background: var(--lh-grad-mid) !important; }
+
+/* Course cards: white, blue top line, soft shadow */
+a.coursebox-container { background: var(--ct-white) !important; border: 0 !important; border-top: 3px solid var(--lh-blue) !important; border-radius: 6px !important; box-shadow: 0 2px 10px rgba(12, 42, 110, 0.10) !important; }
+a.coursebox-container:hover, a.coursebox-container:focus-visible { box-shadow: 0 10px 24px rgba(12, 42, 110, 0.18) !important; }
+a.coursebox-container .coursebox-text { color: var(--lh-ink) !important; }
+
+/* Bands and panels: cream with the thin peach outline */
+.ct-featured, .ct-start, .ct-roles { background: var(--lh-panel) !important; border-top: 1px solid var(--lh-outline); border-bottom: 1px solid var(--lh-outline); }
+.ct-featured .ct-section__head::before { background: var(--lh-blue) !important; }
+.ct-subhero { background: var(--lh-grad-dark) !important; }
+.ct-subhero__title, .ct-subhero__lead, .ct-subhero__crumbs, .ct-subhero__crumbs a { color: var(--ct-white) !important; }
+
+/* Role and topic tiles: the dark Lighthouse tiles (Lending, Compliance...) */
+.ct-role { background: var(--lh-grad-dark) !important; border: 0 !important; border-radius: 8px !important; color: var(--ct-white) !important; }
+.ct-role .ct-role__name, .ct-role .ct-role__text, .ct-role .ct-role__count { color: var(--ct-white) !important; }
+.ct-role:hover, .ct-role:focus-visible { background: var(--lh-grad-mid) !important; }
+
+/* Section links */
+.ct-section__all { color: var(--lh-blue) !important; }
+
+/* Footer: the dark banner gradient */
+.ct-footer { background: var(--lh-grad-dark) !important; }
+@media only screen and (max-width: 767px) {
+  .ct-hero { padding-top: 16px; padding-bottom: 24px; }
+  .ct-hero__inner { padding: 28px 22px; border-radius: 10px; }
+}
+
+/* The header menu code is pasted twice on the test site (an old box still carries a copy, 9 Oct), which built
+   two menus. Only the first copy of the menu, the phone menu button and the phone menu panel shows. */
+#header #header-right .header-link-container ~ .header-link-container,
+#header #header-right .header-mobile-menu ~ .header-mobile-menu,
+.header-mobile-dropdown ~ .header-mobile-dropdown { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   20. Growth's own tags (Mark, 9 Oct 2026): level label on every card, team cards on the
+   home page, Team and Level filters above course lists.
+   -------------------------------------------------------------------------- */
+.ct-badge--level { background: var(--ct-white); color: var(--lh-navy); }
+
+/* Many team cards (Growth has 18): a tighter grid, no icon, name and count only */
+.ct-roles--many .ct-roles__list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.ct-roles--many .ct-role { padding: 14px 18px; gap: 0; }
+.ct-roles--many .ct-role .ct-icon { display: none; }
+.ct-roles--many .ct-role__name { font-size: 15px; }
+.ct-roles--many .ct-role__count { font-size: 13px; color: #c9d6ee !important; }
+@media only screen and (max-width: 1000px) { .ct-roles--many .ct-roles__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media only screen and (max-width: 640px) { .ct-roles--many .ct-roles__list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Filters above a course list */
+.ct-filters__wrap { padding: 28px 0 4px; }
+.ct-filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 20px; padding: 16px 20px; background: var(--lh-panel); border: 1px solid var(--lh-outline); border-radius: 8px; }
+.ct-filters__field { display: flex; flex-direction: column; gap: 6px; margin: 0; font-weight: 400; }
+.ct-filters__label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--lh-navy); }
+.ct-filters__select { min-width: 220px; height: 44px; padding: 0 12px; font: inherit; font-size: 16px; color: var(--lh-ink); background: var(--ct-white); border: 1px solid #c9b79f; border-radius: 6px; }
+.ct-filters__select:focus-visible { outline: 3px solid var(--lh-blue); outline-offset: 2px; }
+.ct-filters__status { margin: 0 0 12px; font-size: 15px; color: var(--lh-ink); }
+.ct-filters__none { margin: 20px 0 0; font-size: 16px; color: var(--lh-ink); }
+@media only screen and (max-width: 640px) {
+  .ct-filters__field, .ct-filters__select { width: 100%; min-width: 0; }
+}
