@@ -384,7 +384,15 @@ try {
        test:start           one of the "place to start" items
        test:format:<key>    live or ondemand: label on every card, and a page
      Only a new section or a new role needs a line added below (title, icon). */
-  if (!isRoot) return;
+  if (!isRoot) {
+    /* A sub-catalog page (Roy's OpCon Connector and Agent Training, 11 Nov):
+       Skilljar's own grid stays, with the Team and Level filters above it. */
+    if (!document.body.classList.contains('sj-page-catalog')) return;
+    ROLES = CT.roles;
+    var subBar = filterBar(grid, {}, tiles);
+    if (subBar) grid.parentNode.insertBefore(subBar, grid);
+    return;
+  }
 
   /* Place to start: test:start tags, or the fallback list in the site settings.
      Roles come from the site settings; their fallback lists cover items with no
@@ -539,8 +547,8 @@ try {
   /* Filters above a course list: Team and Level, from the tags on the courses
      shown. A menu only appears when it has at least two choices. Rows with no
      course left are hidden; a line says so when nothing matches. */
-  function filterBar(body, view) {
-    var cards = Array.prototype.slice.call(body.querySelectorAll('a.coursebox-container'));
+  function filterBar(body, view, list) {
+    var cards = list || Array.prototype.slice.call(body.querySelectorAll('a.coursebox-container'));
     var menus = [];
     function choices(kind, list, skip) {
       return list.filter(function (x) {
@@ -565,7 +573,8 @@ try {
       cards.forEach(function (c) {
         var ok = menus.every(function (mn) { return !picks[mn.kind] || keysOf(c, mn.kind, [{ key: picks[mn.kind] }]).length; });
         c.hidden = !ok;
-        c.style.display = ok ? '' : 'none';
+        /* important: Skilljar's own grid styles must not show a filtered-out tile */
+        if (ok) c.style.removeProperty('display'); else c.style.setProperty('display', 'none', 'important');
         if (ok) shown++;
       });
       Array.prototype.forEach.call(body.querySelectorAll('.ct-section'), function (s) {
