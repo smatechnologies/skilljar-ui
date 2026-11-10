@@ -87,6 +87,7 @@ window.ctLoadSettings = function () {
   /* Extra menu links (a catalog page of its own, Roy, 10 Nov): topic key | link name | address.
      Each sits under that topic in the Learning Catalogs menu, indented. */
   var extra = rows('menu-links').filter(function (p) { return p[0] && p[1] && p[2]; });
+  CT.menuLinks = extra.map(function (p) { return { topic: p[0], title: p[1], href: p[2], lead: p[3] || '' }; });
   var nested = { 'All courses': { href: '/#all', target: '_self' } };
   CT.topics.forEach(function (t) {
     nested[t.title] = { href: '/#subject-' + t.key, target: '_self' };
@@ -384,14 +385,20 @@ try {
        test:start           one of the "place to start" items
        test:format:<key>    live or ondemand: label on every card, and a page
      Only a new section or a new role needs a line added below (title, icon). */
+  /* A sub-catalog page (Roy's OpCon Connector and Agent Training, 11 Nov) is
+     shown like a topic view: banner, Team and Level filters, the same grid.
+     Its name, topic and line come from its menu-links entry in the site settings. */
+  var subPage = null;
   if (!isRoot) {
-    /* A sub-catalog page (Roy's OpCon Connector and Agent Training, 11 Nov):
-       Skilljar's own grid stays, with the Team and Level filters above it. */
     if (!document.body.classList.contains('sj-page-catalog')) return;
-    ROLES = CT.roles;
-    var subBar = filterBar(grid, {}, tiles);
-    if (subBar) grid.parentNode.insertBefore(subBar, grid);
-    return;
+    var path = window.location.pathname.replace(/\/+$/, '');
+    var ml = (CT.menuLinks || []).filter(function (x) { return x.href.replace(/\/+$/, '') === path; })[0];
+    var mt = ml && CT.topics.filter(function (t) { return t.key === ml.topic; })[0];
+    subPage = { icon: ml ? ml.topic : '_other', title: ml ? ml.title : document.title, lead: ml ? ml.lead : '', list: tiles,
+      up: mt ? { title: mt.title, href: '/#subject-' + mt.key } : null };
+    /* Skilljar's empty header band above the list */
+    var sh = document.querySelector('.catalog-header');
+    if (sh && !sh.textContent.trim() && !sh.querySelector('img, iframe')) (sh.parentNode.classList.contains('catalog-center-width') ? sh.parentNode : sh).style.display = 'none';
   }
 
   /* Place to start: test:start tags, or the fallback list in the site settings.
@@ -479,6 +486,7 @@ try {
     var role = ROLES.filter(function (r) { return r.key === m[3]; })[0];
     if (role) view = { icon: role.icon, title: role.title, lead: PLAIN ? 'Courses for ' + role.title + '.' : 'Courses picked for this role.', list: roleCourses(role), role: role.key };
   }
+  if (subPage) view = subPage;
   window.addEventListener('hashchange', function () {
     if (/^#(all|subject-|role-|format-)/.test(window.location.hash) || document.body.classList.contains('ct-view')) window.location.reload();
   });
@@ -490,9 +498,14 @@ try {
     var crumbs = el('nav', 'ct-subhero__crumbs');
     crumbs.setAttribute('aria-label', 'Breadcrumb');
     var home = el('a', '', 'Home');
-    home.href = window.location.pathname;
+    home.href = isRoot ? window.location.pathname : '/';
     crumbs.appendChild(home);
-    if (view.parent) {
+    if (view.up) {
+      crumbs.appendChild(el('span', '', '/'));
+      var upt = el('a', '', view.up.title);
+      upt.href = view.up.href;
+      crumbs.appendChild(upt);
+    } else if (view.parent) {
       crumbs.appendChild(el('span', '', '/'));
       var up = el('a', '', 'All courses');
       up.href = '#all';
@@ -506,7 +519,7 @@ try {
     hrow.appendChild(ic);
     var txt = el('div');
     txt.appendChild(el('h1', 'ct-subhero__title', view.title));
-    txt.appendChild(el('p', 'ct-subhero__lead', view.lead + ' ' + (view.rows ? countOf(tiles) : countOf(view.list)) + '.'));
+    txt.appendChild(el('p', 'ct-subhero__lead', (view.lead ? view.lead + ' ' : '') + (view.rows ? countOf(tiles) : countOf(view.list)) + '.'));
     hrow.appendChild(txt);
     inner.appendChild(crumbs);
     inner.appendChild(hrow);
