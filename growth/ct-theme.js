@@ -84,8 +84,14 @@ window.ctLoadSettings = function () {
   });
   CT.roles.forEach(function (r) { r.courses = CT.fallback.role[r.key] || []; });
   window.CT = CT;
+  /* Extra menu links (a catalog page of its own, Roy, 10 Nov): topic key | link name | address.
+     Each sits under that topic in the Learning Catalogs menu, indented. */
+  var extra = rows('menu-links').filter(function (p) { return p[0] && p[1] && p[2]; });
   var nested = { 'All courses': { href: '/#all', target: '_self' } };
-  CT.topics.forEach(function (t) { nested[t.title] = { href: '/#subject-' + t.key, target: '_self' }; });
+  CT.topics.forEach(function (t) {
+    nested[t.title] = { href: '/#subject-' + t.key, target: '_self' };
+    extra.forEach(function (p) { if (p[0] === t.key) nested[p[1]] = { href: p[2], target: '_self', 'data-ct-child': '' }; });
+  });
   CT.formats.forEach(function (f) { if (f.menu) nested[f.title] = { href: '/#format-' + f.key, target: '_self' }; });
   window.CT_MENU = { 'Home': { href: '/', target: '_self' }, 'Learning Catalogs': { nestedLinks: nested } };
   return CT;
@@ -660,7 +666,11 @@ try {
    above the courses, and "Step n of N" on each course. Completed courses get a tick. */
 (function () {
   function run() {
-    if (!document.body.classList.contains('sj-page-detail-path')) return;
+    /* sj-page-detail-path: the path before registering. sj-page-path: the same path once
+       registered (Resume button, progress bar); Skilljar lays its courses out as rows, which the
+       site's course grid squeezed into three narrow columns (Growth, 10 Oct). */
+    var signedUp = document.body.classList.contains('sj-page-path');
+    if (!signedUp && !document.body.classList.contains('sj-page-detail-path')) return;
     var list = document.getElementById('catalog-courses');
     if (!list || document.querySelector('.ct-path-guide')) return;
     var tiles = list.querySelectorAll('a.coursebox-container');
@@ -697,8 +707,10 @@ try {
     g.innerHTML = '<h2>How this path works</h2>' +
       '<p>This learning path has ' + count + ', listed in order. ' +
       (done ? 'You have finished ' + done + ' of ' + n + '.' : 'Start with step 1 and work down the list.') + '</p>' +
-      '<ol><li><b>1</b>Register once for the whole path</li><li><b>2</b>Take the courses in order</li>' +
-      '<li><b>3</b>Open Show Overview to see what a course covers</li></ol>';
+      (signedUp
+        ? '<ol><li><b>1</b>Take the courses in order</li><li><b>2</b>Open Show Overview to see what a course covers</li></ol>'
+        : '<ol><li><b>1</b>Register once for the whole path</li><li><b>2</b>Take the courses in order</li>' +
+          '<li><b>3</b>Open Show Overview to see what a course covers</li></ol>');
     list.parentNode.insertBefore(g, list);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();

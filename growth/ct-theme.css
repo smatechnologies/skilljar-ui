@@ -1637,6 +1637,9 @@ a.coursebox-container .coursebox-text { color: var(--lh-ink) !important; }
 #header #header-right .header-mobile-menu ~ .header-mobile-menu,
 .header-mobile-dropdown ~ .header-mobile-dropdown { display: none !important; }
 
+/* An extra menu link under a topic (menu-links in the site settings): indented */
+.header-nested-links .header-link[data-ct-child] { padding-left: 16px !important; font-size: 0.94em; }
+
 /* --------------------------------------------------------------------------
    20. Growth's own tags (Mark, 9 Oct 2026): level label on every card, team cards on the
    home page, Team and Level filters above course lists.
@@ -1661,6 +1664,9 @@ a.coursebox-container .coursebox-text { color: var(--lh-ink) !important; }
 .ct-filters__select:focus-visible { outline: 3px solid var(--lh-blue); outline-offset: 2px; }
 .ct-filters__status { margin: 0 0 12px; font-size: 15px; color: var(--lh-ink); }
 .ct-filters__none { margin: 20px 0 0; font-size: 16px; color: var(--lh-ink); }
+/* A tile the filters leave out: the grid rules above force display: block !important,
+   which kept filtered-out tiles on screen while the count changed (Roy, 10 Nov) */
+.ct-view__body a.coursebox-container[hidden] { display: none !important; }
 @media only screen and (max-width: 640px) {
   .ct-filters__field, .ct-filters__select { width: 100%; min-width: 0; }
 }
